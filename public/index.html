@@ -42,7 +42,7 @@
       <a href="#cta" style="color: var(--grey-500); font-size: var(--text-sm); font-weight: 500;">The system</a>
       <a href="https://teamempathy.co.nz" style="color: var(--grey-500); font-size: var(--text-sm); font-weight: 500;">About</a>
     </nav>
-    <a class="te-btn te-btn--primary te-btn--sm" href="#cta">Book a diagnostic</a>
+    <a class="te-btn te-btn--primary te-btn--sm" href="https://teamempathy.co.nz/scorecard">Get your free score</a>
   </div>
 </header>
 
@@ -94,20 +94,20 @@
 
       <div class="te-card" style="padding: 18px 20px; border-color: color-mix(in oklab, var(--forest) 26%, transparent); background: var(--pale-green);">
         <span class="te-eyebrow" style="color: var(--forest);">Your score out of 100</span>
-        <p style="margin: 10px 0 12px; font-size: var(--text-sm); color: var(--grey-700); line-height: 1.55;">Every store gets a score on the AEO Maturity Model. Certified is 80. Lesson 0.2 shows you how to get yours, and our live scorecard tool is coming soon.</p>
-        <a class="te-btn te-btn--secondary te-btn--sm" href="lessons/0-2-your-score-out-of-100/" style="border-color: var(--forest); color: var(--forest);">Get your baseline score</a>
+        <p style="margin: 10px 0 12px; font-size: var(--text-sm); color: var(--grey-700); line-height: 1.55;">Every store gets a score on the AEO Maturity Model. Certified is 80. Get yours free from a live scan of your store, then use lesson 0.2 to read it.</p>
+        <a class="te-btn te-btn--secondary te-btn--sm" href="https://teamempathy.co.nz/scorecard" style="border-color: var(--forest); color: var(--forest);">Get your free score</a>
       </div>
 
       <div class="te-callout te-callout--takeaway">
         <span class="te-callout__label">Yours to keep</span>
-        <div class="te-callout__body"><p>Every lesson, prompt and playbook installs into your business and stays yours. As the models change, we keep the lessons current, and the app that runs it all for you is coming soon.</p></div>
+        <div class="te-callout__body"><p>Every lesson, prompt and playbook installs into your business and stays yours. As the models change, we keep the lessons current. Rather not do it by hand? <a href="https://notableaisearch.com">Notable</a>, our AI search platform for Shopify, runs it for you.</p></div>
       </div>
 
       <div class="te-card" style="padding: 16px 18px;">
         <span class="te-eyebrow" style="color: var(--grey-400);">What's in a lesson</span>
         <p style="margin: 10px 0 12px; font-size: var(--text-sm); color: var(--grey-500);">Most lessons include up to three things. Not every one has the full set, and that is fine.</p>
         <div style="display: flex; flex-direction: column; gap: 8px; font-size: var(--text-sm); color: var(--grey-500);">
-          <span><b style="color: var(--charcoal); font-weight: 600;">Loom</b> · a short video walkthrough</span>
+          <span><b style="color: var(--charcoal); font-weight: 600;">Video</b> · a short walkthrough (rolling out lesson by lesson)</span>
           <span><b style="color: var(--charcoal); font-weight: 600;">SOP</b> · the step-by-step you keep</span>
           <span><b style="color: var(--charcoal); font-weight: 600;">Agent</b> · a Claude prompt that runs it for you</span>
         </div>
@@ -119,12 +119,12 @@
 <!-- ============ CTA + FOOTER (one continuous forest fold) ============ -->
 <footer id="cta" data-theme="forest" class="te-atmos te-grid-fade" style="position: relative; overflow: hidden;">
   <div class="te-container" style="position: relative; z-index: 1; padding-top: 84px; padding-bottom: 60px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px;">
-    <span class="te-eyebrow" style="color: var(--sky);">Prefer we run it?</span>
-    <h2 style="font-size: clamp(2rem, 3.6vw, 2.8rem); max-width: 22ch; margin: 0; color: #FFFFFF;">We will install the whole <span class="te-editorial">playbook</span> for you</h2>
-    <p style="color: rgba(255,255,255,0.78); max-width: 52ch; margin: 0;">A 45-minute working session on your real Shopify data. Zero pitch.</p>
+    <span class="te-eyebrow" style="color: var(--sky);">Your next step</span>
+    <h2 style="font-size: clamp(2rem, 3.6vw, 2.8rem); max-width: 22ch; margin: 0; color: #FFFFFF;">Find out where your store <span class="te-editorial">stands</span></h2>
+    <p style="color: rgba(255,255,255,0.78); max-width: 52ch; margin: 0;">Get your free AI search score out of 100 from a live scan of your store. Then join the free community and learn alongside other ecommerce founders.</p>
     <div style="display: flex; gap: 12px; margin-top: 6px; flex-wrap: wrap; justify-content: center;">
-      <a class="te-btn te-btn--primary te-btn--lg" href="https://teamempathy.co.nz">Book your diagnostic</a>
-      <a class="te-btn te-btn--secondary te-btn--lg" href="https://teamempathy.co.nz">See the offer</a>
+      <a class="te-btn te-btn--primary te-btn--lg" href="https://teamempathy.co.nz/scorecard">Get your free score</a>
+      <a class="te-btn te-btn--secondary te-btn--lg" href="https://teamempathy.co.nz/community">Join the free community</a>
     </div>
   </div>
   <div class="te-container" style="position: relative; z-index: 1;">
@@ -280,16 +280,16 @@ function renderSidebar() {
   const cta = document.getElementById("pb-next-cta");
   if (!next) {
     t.textContent = "You have completed the playbook";
-    s.textContent = "Re-run your baseline in 4.1 each quarter, or book a diagnostic and we will pressure-test it with you.";
-    cta.textContent = "Book a diagnostic";
-    cta.href = "#cta";
+    s.textContent = "Re-run your baseline in 4.1 each quarter, and join the free community to keep learning with other ecommerce founders.";
+    cta.textContent = "Join the free community";
+    cta.href = "https://teamempathy.co.nz/community";
     return;
   }
   const act = ACTS.find(a => a.lessons.includes(next));
   t.textContent = next.title;
   s.textContent = `Module ${act.num}, ${act.title}. ${next.mins} minutes. ${next.covers}`;
   if (next.url) { cta.textContent = "Start the lesson"; cta.href = next.url; cta.style.opacity = ""; cta.style.pointerEvents = ""; }
-  else { cta.textContent = "More lessons coming soon"; cta.href = "#modules"; cta.style.opacity = "0.6"; cta.style.pointerEvents = "none"; }
+  else { cta.textContent = "Get your free score"; cta.href = "https://teamempathy.co.nz/scorecard"; cta.style.opacity = ""; cta.style.pointerEvents = ""; }
 }
 
 function refreshProgress() {

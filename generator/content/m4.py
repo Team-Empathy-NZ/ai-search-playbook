@@ -165,7 +165,7 @@ Analyse: 1) my share of voice per platform (questions where I'm named / total), 
     </ol>
 
     <h2>The options from here</h2>
-    <p><strong>Keep running it yourself.</strong> The playbook stays yours, we keep it current as the models change, and the lessons' prompts get you a long way. <strong>Get the app.</strong> The AI Search OS for Shopify we're building runs the audits, the monitoring and the busywork of this playbook automatically, DIY, minus the grind. It's coming soon, and playbook readers hear first. <strong>Or have us install the whole thing.</strong> A done-for-you transformation: we take a store to Certified (80+) and hand you back a compounding asset with the rhythm running. It starts with a working session on your real data, and the honest version of this conversation, including "you don't need us yet" when that's true.</p>
+    <p><strong>Keep running it yourself.</strong> The playbook stays yours, we keep it current as the models change, and the lessons' prompts get you a long way. <strong>Use Notable.</strong> <a href="https://notableaisearch.com">Notable</a>, our AI search platform for Shopify, runs the audits, the monitoring and the busywork of this playbook for you. Still DIY, minus the grind. <strong>Or have us install the whole thing.</strong> A done-for-you transformation: we take a store to Certified (80+) and hand you back a compounding asset with the rhythm running. It starts with a working session on your real data, and the honest version of this conversation, including "you don't need us yet" when that's true.</p>
     <p>Whichever path: you now know exactly how this game works, which puts you ahead of most of your category. The window from lesson 0.1 is still open. Go compound.</p>
 """,
 "donow": [

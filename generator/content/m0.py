@@ -90,7 +90,7 @@ LESSONS = [
 """,
 "donow": [
 "Score each pillar 1 to 5, multiply each by 5, and add them up. Write down the four pillar scores and the total, plus today's date. That number is your baseline.",
-"Want it done properly? Our live scorecard tool is coming soon: a real scan of your store that scores all four pillars for you. Until then, the prompt below gets you a solid first read.",
+"Want it done properly? <a href=\"https://teamempathy.co.nz/scorecard\">Get your free score here</a>. It runs a live scan of your store and scores all four pillars for you. Prefer to do it yourself? The prompt below gets you a solid first read.",
 ],
 "prompt": """Act as an AEO auditor. Score my Shopify store [URL] against this maturity model: four pillars (Technical, Content, Authority, Measurement), each level 1-5, 5 points per level, 100 total.
 

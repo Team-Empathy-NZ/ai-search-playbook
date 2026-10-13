@@ -12,7 +12,7 @@ HEAD = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title} — The AI Search Playbook · Team Empathy</title>
+<title>{title} · The AI Search Playbook · Team Empathy</title>
 <meta name="description" content="{description}">
 <link rel="canonical" href="{site}/lessons/{slug}/">
 <link rel="stylesheet" href="../../ds/styles.css">
@@ -52,6 +52,14 @@ HEAD = """<!DOCTYPE html>
   .app-soon .dot {{ margin-top: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--sky-400); flex-shrink: 0; }}
   .app-soon p {{ margin: 0; font-size: var(--text-sm); color: var(--grey-500); line-height: 1.55; }}
   .app-soon b {{ color: var(--navy); font-weight: 600; }}
+  .app-soon a {{ color: var(--royal); font-weight: 600; }}
+
+  .video {{ margin: 0 0 28px; border-radius: 16px; overflow: hidden; border: 1px solid var(--line-200); background: var(--paper-100); aspect-ratio: 16 / 9; }}
+  .video iframe {{ width: 100%; height: 100%; border: 0; display: block; }}
+
+  .score-card {{ display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; border-radius: 16px; background: var(--pale-green); border: 1px solid color-mix(in oklab, var(--forest) 26%, transparent); }}
+  .score-card h3 {{ font-size: var(--text-h4); margin: 0 0 4px; }}
+  .score-card p {{ margin: 0; font-size: var(--text-sm); color: var(--grey-700); max-width: 46ch; }}
 
   .tag-soon {{ font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; padding: 3px 8px; border-radius: 100px; background: var(--pale-blue); color: var(--royal-600); border: 1px solid color-mix(in oklab, var(--royal) 25%, transparent); white-space: nowrap; }}
 
@@ -68,7 +76,7 @@ HEAD = """<!DOCTYPE html>
       <a href="../../#cta" style="color: var(--grey-500); font-size: var(--text-sm); font-weight: 500;">The system</a>
       <a href="https://teamempathy.co.nz" style="color: var(--grey-500); font-size: var(--text-sm); font-weight: 500;">About</a>
     </nav>
-    <a class="te-btn te-btn--primary te-btn--sm" href="https://teamempathy.co.nz/contact">Book a diagnostic</a>
+    <a class="te-btn te-btn--primary te-btn--sm" href="https://teamempathy.co.nz/scorecard">Get your free score</a>
   </div>
 </header>
 
@@ -88,7 +96,7 @@ HEAD = """<!DOCTYPE html>
 
 <section style="padding: 28px 0 16px;">
   <article class="te-container lesson-wrap te-article">
-{body}
+{video_html}{body}
 {donow_html}
 {prompt_html}
 {app_html}
@@ -97,6 +105,13 @@ HEAD = """<!DOCTYPE html>
 
 <section style="padding: 16px 0 64px;">
   <div class="te-container lesson-wrap" style="display: flex; flex-direction: column; gap: 16px;">
+    <div class="score-card">
+      <div>
+        <h3>How AI-ready is your store?</h3>
+        <p>Get your free score out of 100. It comes from a live scan of your actual site, so it shows you where to start.</p>
+      </div>
+      <a class="te-btn te-btn--primary" href="https://teamempathy.co.nz/scorecard">Get your free score</a>
+    </div>
     <div class="te-card te-card--raised" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
       <div>
         <h3 style="font-size: var(--text-h4); margin: 0 0 4px;">Done with this lesson?</h3>
@@ -113,12 +128,12 @@ HEAD = """<!DOCTYPE html>
 
 <footer id="cta" data-theme="forest" class="te-atmos te-grid-fade" style="position: relative; overflow: hidden;">
   <div class="te-container" style="position: relative; z-index: 1; padding-top: 80px; padding-bottom: 60px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px;">
-    <span class="te-eyebrow" style="color: var(--sky);">Prefer we run it?</span>
-    <h2 style="font-size: clamp(2rem, 3.6vw, 2.8rem); max-width: 22ch; margin: 0; color: #FFFFFF;">We will install the whole <span class="te-editorial">playbook</span> for you</h2>
-    <p style="color: rgba(255,255,255,0.78); max-width: 52ch; margin: 0;">A 45-minute working session on your real Shopify data. Zero pitch.</p>
+    <span class="te-eyebrow" style="color: var(--sky);">Your next step</span>
+    <h2 style="font-size: clamp(2rem, 3.6vw, 2.8rem); max-width: 22ch; margin: 0; color: #FFFFFF;">Find out where your store <span class="te-editorial">stands</span></h2>
+    <p style="color: rgba(255,255,255,0.78); max-width: 52ch; margin: 0;">Get your free AI search score out of 100 from a live scan of your store. Then join the free community and learn alongside other ecommerce founders.</p>
     <div style="display: flex; gap: 12px; margin-top: 6px; flex-wrap: wrap; justify-content: center;">
-      <a class="te-btn te-btn--primary te-btn--lg" href="https://teamempathy.co.nz/contact">Book your diagnostic</a>
-      <a class="te-btn te-btn--secondary te-btn--lg" href="https://teamempathy.co.nz/services">See the offer</a>
+      <a class="te-btn te-btn--primary te-btn--lg" href="https://teamempathy.co.nz/scorecard">Get your free score</a>
+      <a class="te-btn te-btn--secondary te-btn--lg" href="https://teamempathy.co.nz/community">Join the free community</a>
     </div>
   </div>
   <div class="te-container" style="position: relative; z-index: 1;">
@@ -195,6 +210,13 @@ def esc_attr(s):
     return s.replace('"', "&quot;")
 
 
+def youtube_id(url):
+    """Accept a bare id, youtu.be/<id>, watch?v=<id> or /shorts/<id>."""
+    import re
+    m = re.search(r"(?:v=|youtu\.be/|/shorts/|/embed/)([A-Za-z0-9_-]{11})", url)
+    return m.group(1) if m else url.strip()
+
+
 def render_lesson(l, prev_l, next_l, prompt_counter=[0]):
     mod = l["id"].split(".")[0]
 
@@ -225,8 +247,17 @@ def render_lesson(l, prev_l, next_l, prompt_counter=[0]):
         app_html = (
             '    <div class="app-soon">\n'
             '      <span class="dot"></span>\n'
-            "      <p><b>The AI Search OS for Shopify · coming soon.</b> We're building the app that runs this lesson for you on your live store, on autopilot. The playbook is the manual version, and it works today.</p>\n"
+            '      <p><b>Rather not do this by hand?</b> <a href="https://notableaisearch.com">Notable</a>, our AI search platform for Shopify, runs this step for you on your live store. The playbook is the manual version, and it works today.</p>\n'
             "    </div>\n"
+        )
+
+    video_html = ""
+    if l.get("video"):
+        vid = youtube_id(l["video"])
+        video_html = (
+            '    <div class="video">\n'
+            f'      <iframe src="https://www.youtube-nocookie.com/embed/{vid}" title="{esc_attr(l["title"])} (video walkthrough)" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>\n'
+            '    </div>\n'
         )
 
     prev_link = '<span></span>'
@@ -257,6 +288,7 @@ def render_lesson(l, prev_l, next_l, prompt_counter=[0]):
         donow_html=donow_html,
         prompt_html=prompt_html,
         app_html=app_html,
+        video_html=video_html,
         prev_link=prev_link,
         next_link=next_link,
     )
