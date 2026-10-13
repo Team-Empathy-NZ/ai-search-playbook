@@ -98,16 +98,8 @@ LESSONS = [
 """,
 "donow": [
 "Score each pillar 1 to 5, multiply each by 5, and add them up. Write down the four pillar scores and the total, plus today's date. That number is your baseline.",
-"Want it done properly? <a href=\"https://teamempathy.co.nz/scorecard\">Get your free score here</a>. It runs a live scan of your store and scores all four pillars for you. Prefer to do it yourself? The prompt below gets you a solid first read.",
+"Want it done properly? <a href=\"https://teamempathy.co.nz/scorecard\">Get your free score here</a>. It runs a live scan of your store and scores all four pillars for you.",
 ],
-"prompt": """Act as an AEO auditor. Score my Shopify store [URL] against this maturity model: four pillars (Technical, Content, Authority, Measurement), each level 1-5, 5 points per level, 100 total.
-
-Technical: check if robots.txt allows GPTBot/ClaudeBot/PerplexityBot, whether product pages have Product schema with GTINs, and whether the site loads fast on mobile.
-Content: check for a blog, buying guides, FAQs, and whether content answers questions directly.
-Authority: search for third-party reviews, Reddit mentions, and press coverage of my brand.
-Measurement: I'll tell you: [describe how you currently track SEO/AI visibility, or say "we don't"].
-
-Give me a level and score per pillar with evidence, my total out of 100, and the three fastest moves to close the gap to 80.""",
 "app": True,
 },
 {
