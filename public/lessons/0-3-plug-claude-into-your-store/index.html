@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Plug Claude into your store · The AI Search Playbook · Team Empathy</title>
-<meta name="description" content="Set up Claude as your always-on SEO analyst: connect it to your live Shopify store data, read-only, and every lesson in this playbook gets a prompt you can actually run.">
+<meta name="description" content="Give Claude your Search Console, GA4 and Shopify numbers, then run the AI readiness diagnostic prompt. It builds your own Search & AI readiness report: your score out of 100, the market you're missing, and what it's worth in dollars.">
 <link rel="canonical" href="https://playbook.teamempathy.co.nz/lessons/0-3-plug-claude-into-your-store/">
 <link rel="stylesheet" href="../../ds/styles.css">
 <style>
@@ -78,50 +78,118 @@
       <span class="te-eyebrow">Module 0 · Orientation & baseline · Lesson 0.3</span>
       <h1 style="font-size: clamp(2rem, 3.4vw, 2.7rem); line-height: 1.08; margin: 0; max-width: 20ch;">Plug Claude into your <span class="te-editorial">store</span></h1>
       <div style="display: flex; align-items: center; gap: 14px; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey-400); letter-spacing: var(--ls-wide); text-transform: uppercase;">
-        <span>6 min read</span><span style="opacity:.5;">·</span><span>Setup</span>
+        <span>8 min read</span><span style="opacity:.5;">·</span><span>Setup</span>
       </div>
     </div>
-    <p style="font-size: var(--text-lead); color: var(--grey-500); margin: 6px 0 0;">This is the setup lesson that makes the rest of the playbook 10x more useful. Fifteen minutes now, and every prompt in every lesson runs on your real store instead of your best guesses.</p>
+    <p style="font-size: var(--text-lead); color: var(--grey-500); margin: 6px 0 0;">This is where the playbook stops being theory. Fifteen minutes gathering your own numbers, one prompt, and Claude builds you the same kind of readiness report we build for clients.</p>
   </div>
 </section>
 
 <section style="padding: 28px 0 16px;">
   <article class="te-container lesson-wrap te-article">
 
-    <h2>Why this comes first</h2>
-    <p>Nearly every lesson in this playbook ends with a prompt you can run in Claude. You can run them all by hand, pasting in URLs and copying data across. That works.</p>
-    <p>The better version: give Claude read access to your live store, once, and it becomes an analyst that already knows your products, collections, pages and traffic. Audits stop being homework and start being a question you ask.</p>
-    <p>We run our whole agency this way. It's the same pattern we're building into our Shopify app: the playbook is the manual you keep, the app is the analyst that never sleeps.</p>
+    <h2>Why your own data changes everything</h2>
+    <p>In 0.1 you asked ChatGPT about your category. In 0.2 you scored yourself. Both are useful, and both are guesses.</p>
+    <p>Your own numbers aren't. Search Console shows exactly which searches your store already appears for. GA4 and Shopify show what that traffic is worth. Hand those to Claude with the right prompt and it stops guessing about your store and starts working from what actually happened on it.</p>
+    <p>That's what this lesson does. It's the same diagnostic prompt we hand out in our community, and it produces a proper report: where you stand, the demand you're missing, and the first things to fix.</p>
 
-    <h2>The safe way to connect</h2>
-    <p>Three rules before you connect anything:</p>
+    <h2>Step 1: gather your numbers</h2>
+    <p>You need three things. Screenshots are fine; exports are better.</p>
     <ol>
-      <li><strong>Read-only, always.</strong> Claude should be able to see your store, never change it. Don't hand any AI tool write access to your theme or products while you're learning.</li>
-      <li><strong>Use official doors.</strong> Shopify's storefront data is already public and machine-readable (your sitemap, your product feeds). Start there before touching admin APIs.</li>
-      <li><strong>Keep credentials out of chats.</strong> If a tool needs an API key, it goes in the tool's settings, never pasted into a conversation.</li>
+      <li><strong>Google Search Console.</strong> Open Performance, then Search results. Set the date range to the last 12 months, then hit Export and download the CSV. The Queries and Pages tabs are the ones that matter. This is the most important file of the three.</li>
+      <li><strong>GA4.</strong> Open Reports, then Acquisition, then Traffic acquisition, set to the last 12 months. Screenshot it so Claude can see sessions and revenue by channel, especially Organic Search.</li>
+      <li><strong>Shopify.</strong> Open Analytics and screenshot the overview for the last 12 months: total sales, sessions and conversion rate. If you can, add the sessions and sales by referrer reports too.</li>
     </ol>
+    <p>No Search Console yet? Set it up today (it's free, and lesson 1.9 explains why it matters) and run the prompt anyway. Claude will work from what it can see and tell you what's missing.</p>
 
-    <h2>Three levels of setup</h2>
-    <p><strong>Level 1, zero setup (works today).</strong> Claude can read any public URL you give it. Your store's sitemap lives at <strong>yourstore.com/sitemap.xml</strong>, and your products are machine-readable at <strong>yourstore.com/products.json</strong>. Paste those into a Claude conversation and it can audit real data immediately. Every prompt in this playbook works at this level.</p>
-    <p><strong>Level 2, connected analyst.</strong> Claude supports connectors (MCP) that link it to live data sources: Google Search Console, GA4, and your Shopify store. Connect those and "how did my collection pages do this month" becomes a question, not an export job. Setup lives in Claude's settings under connectors, and takes about 15 minutes.</p>
-    <p><strong>Level 3, the operating system.</strong> Audits that run themselves on a schedule, reports that land before you wake up, fixes drafted and waiting for approval. This is what we build for clients, and it's what our app will do for every store. You don't need it to finish this playbook. You'll want it by the end.</p>
+    <h2>Step 2: keep it safe</h2>
+    <ul>
+      <li><strong>Share numbers, never logins.</strong> Claude only ever needs the exports and screenshots. It never needs your passwords or admin access.</li>
+      <li><strong>Read-only, always.</strong> Nothing in this lesson changes your store. You're giving Claude something to read.</li>
+      <li><strong>Use your own Claude account.</strong> Your data stays in your conversation.</li>
+    </ul>
 
-    <h2>Your first analyst session</h2>
-    <p>Once you've got Level 1 working, ask real questions. Which products are missing descriptions? Which collections have no copy at all? What does my products.json say my bestseller's title is, and would a stranger search for that phrase? You'll find your first five fixes inside ten minutes.</p>
+    <h2>Step 3: run the diagnostic prompt</h2>
+    <p>Open a new Claude chat and make sure web search is switched on, so Claude can look at your live site (your robots.txt, your product pages, your blog). Attach your three files, copy the prompt below, fill in the brand details at the top, and send it.</p>
+    <p>It works through seven steps, the same way we work through a store for a client:</p>
+    <ol>
+      <li>Inspects your site the way an AI search engine would.</li>
+      <li>Splits your searches into branded and non-branded, because non-branded is the market you can actually grow.</li>
+      <li>Sizes your market from free, real data, labelling every number measured or estimated.</li>
+      <li>Tests your AI visibility directly, with ten buyer questions.</li>
+      <li>Scores you out of 100 on the four pillars from 0.2.</li>
+      <li>Builds a money model from your own numbers.</li>
+      <li>Writes it all up as a five-section report.</li>
+    </ol>
+    <p>Give it a few minutes. When it's done, save the conversation. Lesson 0.4 walks you through reading it properly.</p>
 
     <div class="donow">
       <span class="label">Do this now</span>
-      <p>Open Claude, paste in yourstore.com/sitemap.xml and yourstore.com/products.json, and run the prompt below. Save the conversation: it's your store's first analyst session, and you'll come back to it all through Module 1.</p>
+      <p>Export your Search Console data, screenshot GA4 and Shopify, then run the prompt below in Claude with all three attached. Save the report it gives you; it's the starting point for the rest of the playbook.</p>
+      <p>Then bring your report into the <a href="https://teamempathy.co.nz/community">free community</a>, and we'll tell you what we'd do first.</p>
     </div>
 
     <div class="te-prompt te-prompt--bare" style="margin-top: 18px;">
       <div class="te-prompt__bar">
-        <span class="te-prompt__label"><span class="te-prompt__dot"></span>Run it with Claude</span>
+        <span class="te-prompt__label"><span class="te-prompt__dot"></span>The AI readiness diagnostic prompt</span>
         <button class="te-prompt__copy" type="button" data-copy="prompt-0-3">Copy</button>
       </div>
-      <pre id="prompt-0-3" class="te-prompt__body">You're my SEO analyst. Read my store's sitemap at [yourstore.com/sitemap.xml] and my product data at [yourstore.com/products.json].
+      <pre id="prompt-0-3" class="te-prompt__body">I run an ecommerce brand and I want you to build me an honest Search &amp; AI readiness report. You are acting as a senior search strategist. Be direct, be specific, and never dress up a weak number. I would rather know.
 
-Tell me: 1) how many products, collections and pages I have, 2) five products whose titles or descriptions are too thin for a search engine or AI to understand what they are, 3) any obvious gaps (empty collections, missing pages) you can see, 4) the three fixes you'd make first and why.</pre>
+MY BRAND
+- Brand name: [your brand]
+- Website: [yourbrand.com]
+- Main market: [NZ / AU / US / UK / other]
+- Platform: [Shopify / WooCommerce / other]
+- What we sell, in one line: [e.g. natural skincare for sensitive skin]
+- Attached: [Search Console screenshots or export / GA4 screenshots / store analytics screenshots]
+
+If I haven't attached something, work with what you can see, clearly mark what's missing, and tell me what it would sharpen.
+
+STEP 1: INSPECT MY SITE THE WAY AN AI SEARCH ENGINE WOULD
+If you can browse the web, check my site directly:
+- Fetch my robots.txt. Am I allowing or blocking the AI crawlers: GPTBot, ClaudeBot, PerplexityBot, Google-Extended, OAI-SearchBot?
+- Open my homepage, one collection page and one product page. Is there Product structured data (price, availability, reviews)? Are the page titles, meta descriptions and headings doing real work, or are they thin?
+- Look at my blog or guides section, if I have one. When was it last updated? Does the content answer real buyer questions, or is it filler?
+- Check whether my sitemap.xml exists and roughly how many pages I have.
+If you can't browse, say so and score from what I've attached.
+
+STEP 2: SPLIT MY SEARCH DATA INTO BRANDED AND NON-BRANDED
+From my Search Console queries, classify every query as branded (contains my brand name or obvious misspellings of it) or non-branded (category searches, like "best natural moisturiser nz"). This split matters more than any other number: branded searches are people who already know me, and no strategy grows them. Non-branded is the market I can actually win. Run every growth calculation on the non-branded slice only, and say so. If my brand name doubles as a category term people search generically (a brand literally named after the product), count only clearly navigational searches as branded, and tell me how you drew the line.
+
+STEP 3: SIZE MY MARKET WITHOUT PAID SEO TOOLS
+You don't have Ahrefs or SEMrush, so build the demand picture from what's free and real:
+- My Search Console impressions are measured data: they show how often my site actually appeared in searches. Use non-branded impressions as the measured floor of my market.
+- My site only appears for a slice of the category, so estimate what I'm not seeing: use web search, Google's autocomplete and People Also Ask patterns, and your own knowledge of how people shop this category to map the full set of question and comparison searches around my products.
+- Label every figure honestly: "measured" (from my data) or "directional" (your estimate). Never present an estimate as a fact.
+
+STEP 4: TEST MY AI VISIBILITY YOURSELF
+You are an AI assistant, so run the test directly. Write 10 realistic questions a buyer in my market would ask an AI before purchasing (best-of lists, comparisons, "is it worth it" questions, gift and use-case questions). Answer each one the way you normally would, then report: how many times would my brand naturally come up? Which brands do come up? That gap is my AI visibility today.
+
+STEP 5: SCORE ME OUT OF 100
+Score four pillars, 25 points each. For each pillar give the score, the single biggest reason it isn't higher, and the one fix that moves it most:
+- TECHNICAL /25: can AI and search engines crawl, read and trust my site (crawler access, structured data, site speed, clean architecture)? If you quote a speed number, name the test it comes from and what it simulates; a lab score and how the site feels on a good connection are different things, and I want both stated straight.
+- CONTENT /25: do I have content that answers the non-branded questions in my category, or just product pages?
+- AUTHORITY /25: do other sites, publications and communities mention and link to me? Would an AI have any reason to trust me over competitors?
+- MEASUREMENT /25: am I tracking organic and AI-sourced traffic and revenue properly? Be strict here: having GA4 installed is table stakes and scores low. Most brands score 5 to 10 on this pillar.
+80 out of 100 is AI-ready. Most established brands land between 35 and 55. Don't flatter me.
+
+STEP 6: BUILD THE MONEY MODEL
+One model, from my own numbers:
+- Value of a non-branded click = my non-branded organic revenue divided by my non-branded organic clicks. If revenue by channel isn't available, model it as conversion rate x average order value and label it modelled. If no per-channel conversion rate can be trusted at all, use blended revenue per visit (total revenue divided by total visits), call the dollar columns directional, and tell me which single piece of data would firm them up.
+- Assume roughly 1 in 5 category searches becomes an organic click somewhere (the winnable pool). Work out what share of that pool I hold today.
+- Build a scenario table with exactly these rows and columns. Rows: Today, Conservative, Mid, High. Columns: share of the non-branded market, non-branded clicks per year, non-branded revenue per year, new revenue per year. Never model my share above 25% without flagging it. Then state plainly what each extra 1% of market share is worth to me per year.
+- My branded revenue sits on top, unchanged. Say that explicitly.
+
+STEP 7: WRITE THE REPORT
+Five sections, in this order, tight and declarative, no fluff:
+1. Executive summary: three things to know, then the scenario table.
+2. How AI-ready you are today: the /100 scorecard with the four pillars.
+3. The market you're missing: the demand picture, branded vs non-branded, where I rank.
+4. The opportunity, in dollars: the money model and the per-1% figure.
+5. What to do next: the five highest-impact actions in priority order, each 2 to 3 sentences.
+
+Rules for the whole report: plain English, no jargon without a one-line explanation, every number labelled measured or modelled, honest about limitations, and short enough that I'll actually read it. Around 1,200 words.</pre>
     </div>
 
     <div class="app-soon">
@@ -150,7 +218,7 @@ Tell me: 1) how many products, collections and pages I have, 2) five products wh
     </div>
     <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center;">
       <a class="crumb" href="../0-2-your-score-out-of-100/">← 0.2 Where you stand: your score out of 100</a>
-      <a class="crumb" href="../0-4-the-30-minute-quick-win-audit/">0.4 The 30-minute quick-win audit →</a>
+      <a class="crumb" href="../0-4-read-your-report/">0.4 Read your report in detail →</a>
     </div>
   </div>
 </section>
@@ -186,7 +254,7 @@ Tell me: 1) how many products, collections and pages I have, 2) five products wh
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "Plug Claude into your store",
-  "description": "Set up Claude as your always-on SEO analyst: connect it to your live Shopify store data, read-only, and every lesson in this playbook gets a prompt you can actually run.",
+  "description": "Give Claude your Search Console, GA4 and Shopify numbers, then run the AI readiness diagnostic prompt. It builds your own Search & AI readiness report: your score out of 100, the market you're missing, and what it's worth in dollars.",
   "author": { "@type": "Organization", "name": "Team Empathy", "url": "https://teamempathy.co.nz" },
   "publisher": { "@type": "Organization", "name": "Team Empathy" },
   "isPartOf": { "@type": "Course", "name": "The AI Search Playbook for Ecommerce" },

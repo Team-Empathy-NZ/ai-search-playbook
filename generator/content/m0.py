@@ -1,4 +1,11 @@
 # Module 0 · Orientation & baseline
+import html as _html
+import os as _os
+
+# 0.3 runs the AI readiness diagnostic prompt from teamempathy.co.nz/community.
+# Kept in diagnostic_prompt.txt; build.py warns if the community page drifts.
+DIAGNOSTIC_PROMPT = _html.escape(open(_os.path.join(_os.path.dirname(__file__), "diagnostic_prompt.txt")).read().strip(), quote=False)
+
 LESSONS = [
 {
 "id": "0.1",
@@ -47,7 +54,8 @@ LESSONS = [
     <p>That is the system the Playbook teaches you to build.</p>
 """,
 "donow": [
-"Ask ChatGPT a buying question in your category: \"best [your product] for [use case]\". Note which brands it names. Those are the brands you're up against for AI visibility, and by the end of this playbook you'll know exactly how to join them.",
+"Ask ChatGPT a buying question in your category: \"best [your product] for [use case]\". Do you pop up? Note which brands it names. Those are the brands you're up against for AI visibility, and by the end of this playbook you'll know exactly how to join them.",
+"Then ask it straight: \"What do you know about [your brand]?\" What it gets wrong, or doesn't know at all, is your starting point.",
 ],
 "prompt": """Act as an AI search analyst. For my store [URL], list the ten questions a buyer in my category would ask ChatGPT or Perplexity before purchasing, and note whether my brand is likely to be named in the answer today.""",
 "app": True,
@@ -107,78 +115,110 @@ Give me a level and score per pillar with evidence, my total out of 100, and the
 "slug": "0-3-plug-claude-into-your-store",
 "title": "Plug Claude into your store",
 "h1": 'Plug Claude into your <span class="te-editorial">store</span>',
-"description": "Set up Claude as your always-on SEO analyst: connect it to your live Shopify store data, read-only, and every lesson in this playbook gets a prompt you can actually run.",
+"description": "Give Claude your Search Console, GA4 and Shopify numbers, then run the AI readiness diagnostic prompt. It builds your own Search & AI readiness report: your score out of 100, the market you're missing, and what it's worth in dollars.",
 "tag": "Setup",
-"mins": 6,
-"lead": "This is the setup lesson that makes the rest of the playbook 10x more useful. Fifteen minutes now, and every prompt in every lesson runs on your real store instead of your best guesses.",
+"mins": 8,
+"lead": "This is where the playbook stops being theory. Fifteen minutes gathering your own numbers, one prompt, and Claude builds you the same kind of readiness report we build for clients.",
 "body": """
-    <h2>Why this comes first</h2>
-    <p>Nearly every lesson in this playbook ends with a prompt you can run in Claude. You can run them all by hand, pasting in URLs and copying data across. That works.</p>
-    <p>The better version: give Claude read access to your live store, once, and it becomes an analyst that already knows your products, collections, pages and traffic. Audits stop being homework and start being a question you ask.</p>
-    <p>We run our whole agency this way. It's the same pattern we're building into our Shopify app: the playbook is the manual you keep, the app is the analyst that never sleeps.</p>
+    <h2>Why your own data changes everything</h2>
+    <p>In 0.1 you asked ChatGPT about your category. In 0.2 you scored yourself. Both are useful, and both are guesses.</p>
+    <p>Your own numbers aren't. Search Console shows exactly which searches your store already appears for. GA4 and Shopify show what that traffic is worth. Hand those to Claude with the right prompt and it stops guessing about your store and starts working from what actually happened on it.</p>
+    <p>That's what this lesson does. It's the same diagnostic prompt we hand out in our community, and it produces a proper report: where you stand, the demand you're missing, and the first things to fix.</p>
 
-    <h2>The safe way to connect</h2>
-    <p>Three rules before you connect anything:</p>
+    <h2>Step 1: gather your numbers</h2>
+    <p>You need three things. Screenshots are fine; exports are better.</p>
     <ol>
-      <li><strong>Read-only, always.</strong> Claude should be able to see your store, never change it. Don't hand any AI tool write access to your theme or products while you're learning.</li>
-      <li><strong>Use official doors.</strong> Shopify's storefront data is already public and machine-readable (your sitemap, your product feeds). Start there before touching admin APIs.</li>
-      <li><strong>Keep credentials out of chats.</strong> If a tool needs an API key, it goes in the tool's settings, never pasted into a conversation.</li>
+      <li><strong>Google Search Console.</strong> Open Performance, then Search results. Set the date range to the last 12 months, then hit Export and download the CSV. The Queries and Pages tabs are the ones that matter. This is the most important file of the three.</li>
+      <li><strong>GA4.</strong> Open Reports, then Acquisition, then Traffic acquisition, set to the last 12 months. Screenshot it so Claude can see sessions and revenue by channel, especially Organic Search.</li>
+      <li><strong>Shopify.</strong> Open Analytics and screenshot the overview for the last 12 months: total sales, sessions and conversion rate. If you can, add the sessions and sales by referrer reports too.</li>
     </ol>
+    <p>No Search Console yet? Set it up today (it's free, and lesson 1.9 explains why it matters) and run the prompt anyway. Claude will work from what it can see and tell you what's missing.</p>
 
-    <h2>Three levels of setup</h2>
-    <p><strong>Level 1, zero setup (works today).</strong> Claude can read any public URL you give it. Your store's sitemap lives at <strong>yourstore.com/sitemap.xml</strong>, and your products are machine-readable at <strong>yourstore.com/products.json</strong>. Paste those into a Claude conversation and it can audit real data immediately. Every prompt in this playbook works at this level.</p>
-    <p><strong>Level 2, connected analyst.</strong> Claude supports connectors (MCP) that link it to live data sources: Google Search Console, GA4, and your Shopify store. Connect those and "how did my collection pages do this month" becomes a question, not an export job. Setup lives in Claude's settings under connectors, and takes about 15 minutes.</p>
-    <p><strong>Level 3, the operating system.</strong> Audits that run themselves on a schedule, reports that land before you wake up, fixes drafted and waiting for approval. This is what we build for clients, and it's what our app will do for every store. You don't need it to finish this playbook. You'll want it by the end.</p>
+    <h2>Step 2: keep it safe</h2>
+    <ul>
+      <li><strong>Share numbers, never logins.</strong> Claude only ever needs the exports and screenshots. It never needs your passwords or admin access.</li>
+      <li><strong>Read-only, always.</strong> Nothing in this lesson changes your store. You're giving Claude something to read.</li>
+      <li><strong>Use your own Claude account.</strong> Your data stays in your conversation.</li>
+    </ul>
 
-    <h2>Your first analyst session</h2>
-    <p>Once you've got Level 1 working, ask real questions. Which products are missing descriptions? Which collections have no copy at all? What does my products.json say my bestseller's title is, and would a stranger search for that phrase? You'll find your first five fixes inside ten minutes.</p>
+    <h2>Step 3: run the diagnostic prompt</h2>
+    <p>Open a new Claude chat and make sure web search is switched on, so Claude can look at your live site (your robots.txt, your product pages, your blog). Attach your three files, copy the prompt below, fill in the brand details at the top, and send it.</p>
+    <p>It works through seven steps, the same way we work through a store for a client:</p>
+    <ol>
+      <li>Inspects your site the way an AI search engine would.</li>
+      <li>Splits your searches into branded and non-branded, because non-branded is the market you can actually grow.</li>
+      <li>Sizes your market from free, real data, labelling every number measured or estimated.</li>
+      <li>Tests your AI visibility directly, with ten buyer questions.</li>
+      <li>Scores you out of 100 on the four pillars from 0.2.</li>
+      <li>Builds a money model from your own numbers.</li>
+      <li>Writes it all up as a five-section report.</li>
+    </ol>
+    <p>Give it a few minutes. When it's done, save the conversation. Lesson 0.4 walks you through reading it properly.</p>
 """,
 "donow": [
-"Open Claude, paste in yourstore.com/sitemap.xml and yourstore.com/products.json, and run the prompt below. Save the conversation: it's your store's first analyst session, and you'll come back to it all through Module 1.",
+"Export your Search Console data, screenshot GA4 and Shopify, then run the prompt below in Claude with all three attached. Save the report it gives you; it's the starting point for the rest of the playbook.",
+"Then bring your report into the <a href=\"https://teamempathy.co.nz/community\">free community</a>, and we'll tell you what we'd do first.",
 ],
-"prompt": """You're my SEO analyst. Read my store's sitemap at [yourstore.com/sitemap.xml] and my product data at [yourstore.com/products.json].
-
-Tell me: 1) how many products, collections and pages I have, 2) five products whose titles or descriptions are too thin for a search engine or AI to understand what they are, 3) any obvious gaps (empty collections, missing pages) you can see, 4) the three fixes you'd make first and why.""",
+"prompt_label": "The AI readiness diagnostic prompt",
+"prompt": DIAGNOSTIC_PROMPT,
 "app": True,
 },
 {
 "id": "0.4",
-"slug": "0-4-the-30-minute-quick-win-audit",
-"title": "The 30-minute quick-win audit",
-"h1": 'The 30-minute quick-win <span class="te-editorial">audit</span>',
-"description": "A fast, repeatable audit that finds the highest-impact fixes on your Shopify store and turns them into a ranked action plan before you start the real build.",
+"slug": "0-4-read-your-report",
+"title": "Read your report in detail",
+"h1": 'Read your report in <span class="te-editorial">detail</span>',
+"description": "Walk through your Search & AI readiness report section by section: the score, the market you're missing, the money model and the five actions. Pressure-test it, then turn it into your plan for the rest of the playbook.",
 "tag": "Baseline",
-"mins": 7,
-"lead": "You've got your score and Claude's plugged in. Now run one fast sweep to catch the quick wins, the fixes that take minutes and start paying back straight away.",
+"mins": 8,
+"lead": "You've got a report. Now read it like a strategist would: check what's measured and what's estimated, find the one number that matters most, and turn the five actions into your plan for the modules ahead.",
 "body": """
-    <h2>Why audit before you build</h2>
-    <p>Most stores are leaking visibility in ways that take 10 minutes to fix and months to notice on their own. Blocked crawlers, empty collection pages, missing product identifiers, supplier descriptions copied onto 40 products. Finding them first means every module you work through lands on a clean foundation.</p>
-    <p>This audit is deliberately shallow and fast. The deep versions live in the modules. This is the sweep that tells you which modules will pay you back fastest.</p>
+    <h2>Before you read: measured or estimated?</h2>
+    <p>Every number in your report should be labelled. <strong>Measured</strong> means it came straight from your data, like Search Console impressions or GA4 revenue. <strong>Directional</strong> or <strong>modelled</strong> means Claude estimated it.</p>
+    <p>Both are useful, but they carry different weight. Make decisions on the measured numbers and treat the estimates as a sense of scale. If a number has no label, ask Claude where it came from before you lean on it.</p>
 
-    <h2>The five checks</h2>
-    <ol>
-      <li><strong>Can AI get in?</strong> Open yourstore.com/robots.txt. Look for GPTBot, ClaudeBot, PerplexityBot or Google-Extended being disallowed. 85% of brands are accidentally blocking AI crawlers, and it's a two-minute fix. <span class="src">(Full fix in lesson 1.1)</span></li>
-      <li><strong>Do your products carry ID?</strong> Pick your three bestsellers and check for barcodes (GTINs) in Shopify admin. 60% of ecommerce catalogues have missing GTINs, and AI shopping surfaces lean on them hard. <span class="src">(Lesson 1.4)</span></li>
-      <li><strong>Are your collections empty?</strong> Open your five biggest collection pages. If they're a grid of products with no copy, you're sitting on your biggest untapped traffic pages. <span class="src">(Lesson 1.5)</span></li>
-      <li><strong>Would AI quote your content?</strong> Open your most recent blog post, if you have one. Does the first paragraph answer a question a buyer would actually ask? Or does it warm up for 200 words first? <span class="src">(Module 2)</span></li>
-      <li><strong>Does anyone vouch for you?</strong> Search your brand name plus "review" and your brand name on Reddit. What comes up is what the AI sees when it decides whether you're safe to recommend. <span class="src">(Module 3)</span></li>
-    </ol>
+    <h2>1. The executive summary</h2>
+    <p>Three things to know, then the scenario table: Today, Conservative, Mid and High. Look at the gap between Today and Conservative first. Conservative is the version you should plan around. High is what it looks like if everything goes right, so don't build your budget on it.</p>
 
-    <h2>Turn it into a ranked plan</h2>
-    <p>Score each check as a pass, a partial, or a fail. Fails on checks 1 and 2 are your first fixes: they're fast and they gate everything else. Fails on 3 and 4 tell you whether Module 1 or Module 2 is your biggest lever. A fail on 5 means Module 3 is where your gap is, and honestly, that's true for most stores.</p>
-    <p>Write the plan down as a list in priority order. As you work through the playbook, this is the list you're crossing off.</p>
+    <h2>2. How AI-ready you are today</h2>
+    <p>Your score out of 100 across the four pillars. Put it next to the score you gave yourself in 0.2. If they're miles apart, find out why: usually you've been generous on a pillar, or Claude couldn't see something you know about.</p>
+    <p>Each pillar points to part of this playbook:</p>
+    <ul>
+      <li><strong>Technical</strong> is Module 1.</li>
+      <li><strong>Content</strong> is Module 2.</li>
+      <li><strong>Authority</strong> is Module 3.</li>
+      <li><strong>Measurement</strong> is Module 4.</li>
+    </ul>
+    <p>Your lowest pillar is the module that will pay you back fastest. 80 is AI-ready, and that's the target.</p>
+
+    <h2>3. The market you're missing</h2>
+    <p>This is the section most people skim, and it's the one that matters most. Check the branded vs non-branded split. Branded searches are people who already know you, and no strategy grows them much. Non-branded is everyone shopping your category who hasn't found you yet. That's the market you can win.</p>
+    <p>Look at which non-branded searches you already appear for, and where you rank. Searches where you're sitting on page two are the closest wins in the whole report.</p>
+
+    <h2>4. The opportunity, in dollars</h2>
+    <p>Three numbers to find:</p>
+    <ul>
+      <li><strong>The value of a non-branded click.</strong> What one visitor from a category search is worth to you.</li>
+      <li><strong>Your share of the market today.</strong> How much of the winnable pool you already hold.</li>
+      <li><strong>The value of each extra 1% of share.</strong> This is the number to remember. It tells you what the work is worth before you start it.</li>
+    </ul>
+    <p>Sanity-check it. Your branded revenue should sit on top, untouched. Any share above 25% should be flagged as a stretch. If the dollar columns are marked directional, the report should tell you which piece of data would firm them up, so go and get it.</p>
+
+    <h2>5. What to do next</h2>
+    <p>Five actions in priority order. Match each one to the lesson that covers it: blocked AI crawlers is 1.1, missing product schema is 1.4, empty collection pages is 1.5, no content answering buyer questions is Module 2, not enough reviews or mentions is Module 3. That list, in that order, is your path through the playbook.</p>
+
+    <h2>Pressure-test it</h2>
+    <p>Claude can be wrong, so check two things yourself before you act. Open yourstore.com/robots.txt and confirm what it said about the AI crawlers. Then ask ChatGPT two or three of the buyer questions from the AI visibility test and see whether the answers match. If something doesn't line up, tell Claude and ask it to rework that section.</p>
 """,
 "donow": [
-"Run the five checks. 30 minutes, tops. Write down your pass/partial/fail for each, then run the prompt below to have Claude turn it into your ranked action plan.",
+"Read the report section by section. Write down four things: your score out of 100, your lowest pillar, the value of an extra 1% of market share, and the five actions in order. Then run the prompt below in the same Claude chat to turn them into your plan.",
+"Stuck on something in your report? Bring it into the <a href=\"https://teamempathy.co.nz/community\">free community</a>.",
 ],
-"prompt": """Here are my 30-minute audit results for [yourstore.com]:
-1. AI crawlers allowed: [pass/partial/fail + what you saw]
-2. GTINs on bestsellers: [pass/partial/fail]
-3. Collection pages have copy: [pass/partial/fail]
-4. Content answers questions first: [pass/partial/fail]
-5. Third-party proof (reviews/Reddit): [pass/partial/fail + what you found]
+"prompt": """Now turn this report into my action plan for The AI Search Playbook. The playbook has four modules: Module 1 Technical foundations (crawler access, Shopify URLs, product pages, product schema and GTINs, collections, internal links, merchant feeds, speed), Module 2 Content (buying-intent keywords, topic clusters, buying guides, refreshing content), Module 3 Authority (reviews, review platforms, Reddit and forums, digital PR, founder presence) and Module 4 Measurement.
 
-Turn this into a ranked action plan. For each item: the fix, why it matters for AI search visibility, effort (minutes/hours/days), and expected impact (high/medium/low). Order by impact-per-effort.""",
+1. For each of the five actions in the report, tell me which module covers it and why it's in that position.
+2. Tell me which numbers in the report are measured and which are estimates, and which estimate I should firm up first.
+3. Give me the order to work through the modules, starting with my lowest-scoring pillar, and the first three things to do this week.""",
 "app": True,
 },
 ]

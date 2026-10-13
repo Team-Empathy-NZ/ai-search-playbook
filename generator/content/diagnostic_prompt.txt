@@ -1,0 +1,56 @@
+I run an ecommerce brand and I want you to build me an honest Search & AI readiness report. You are acting as a senior search strategist. Be direct, be specific, and never dress up a weak number. I would rather know.
+
+MY BRAND
+- Brand name: [your brand]
+- Website: [yourbrand.com]
+- Main market: [NZ / AU / US / UK / other]
+- Platform: [Shopify / WooCommerce / other]
+- What we sell, in one line: [e.g. natural skincare for sensitive skin]
+- Attached: [Search Console screenshots or export / GA4 screenshots / store analytics screenshots]
+
+If I haven't attached something, work with what you can see, clearly mark what's missing, and tell me what it would sharpen.
+
+STEP 1: INSPECT MY SITE THE WAY AN AI SEARCH ENGINE WOULD
+If you can browse the web, check my site directly:
+- Fetch my robots.txt. Am I allowing or blocking the AI crawlers: GPTBot, ClaudeBot, PerplexityBot, Google-Extended, OAI-SearchBot?
+- Open my homepage, one collection page and one product page. Is there Product structured data (price, availability, reviews)? Are the page titles, meta descriptions and headings doing real work, or are they thin?
+- Look at my blog or guides section, if I have one. When was it last updated? Does the content answer real buyer questions, or is it filler?
+- Check whether my sitemap.xml exists and roughly how many pages I have.
+If you can't browse, say so and score from what I've attached.
+
+STEP 2: SPLIT MY SEARCH DATA INTO BRANDED AND NON-BRANDED
+From my Search Console queries, classify every query as branded (contains my brand name or obvious misspellings of it) or non-branded (category searches, like "best natural moisturiser nz"). This split matters more than any other number: branded searches are people who already know me, and no strategy grows them. Non-branded is the market I can actually win. Run every growth calculation on the non-branded slice only, and say so. If my brand name doubles as a category term people search generically (a brand literally named after the product), count only clearly navigational searches as branded, and tell me how you drew the line.
+
+STEP 3: SIZE MY MARKET WITHOUT PAID SEO TOOLS
+You don't have Ahrefs or SEMrush, so build the demand picture from what's free and real:
+- My Search Console impressions are measured data: they show how often my site actually appeared in searches. Use non-branded impressions as the measured floor of my market.
+- My site only appears for a slice of the category, so estimate what I'm not seeing: use web search, Google's autocomplete and People Also Ask patterns, and your own knowledge of how people shop this category to map the full set of question and comparison searches around my products.
+- Label every figure honestly: "measured" (from my data) or "directional" (your estimate). Never present an estimate as a fact.
+
+STEP 4: TEST MY AI VISIBILITY YOURSELF
+You are an AI assistant, so run the test directly. Write 10 realistic questions a buyer in my market would ask an AI before purchasing (best-of lists, comparisons, "is it worth it" questions, gift and use-case questions). Answer each one the way you normally would, then report: how many times would my brand naturally come up? Which brands do come up? That gap is my AI visibility today.
+
+STEP 5: SCORE ME OUT OF 100
+Score four pillars, 25 points each. For each pillar give the score, the single biggest reason it isn't higher, and the one fix that moves it most:
+- TECHNICAL /25: can AI and search engines crawl, read and trust my site (crawler access, structured data, site speed, clean architecture)? If you quote a speed number, name the test it comes from and what it simulates; a lab score and how the site feels on a good connection are different things, and I want both stated straight.
+- CONTENT /25: do I have content that answers the non-branded questions in my category, or just product pages?
+- AUTHORITY /25: do other sites, publications and communities mention and link to me? Would an AI have any reason to trust me over competitors?
+- MEASUREMENT /25: am I tracking organic and AI-sourced traffic and revenue properly? Be strict here: having GA4 installed is table stakes and scores low. Most brands score 5 to 10 on this pillar.
+80 out of 100 is AI-ready. Most established brands land between 35 and 55. Don't flatter me.
+
+STEP 6: BUILD THE MONEY MODEL
+One model, from my own numbers:
+- Value of a non-branded click = my non-branded organic revenue divided by my non-branded organic clicks. If revenue by channel isn't available, model it as conversion rate x average order value and label it modelled. If no per-channel conversion rate can be trusted at all, use blended revenue per visit (total revenue divided by total visits), call the dollar columns directional, and tell me which single piece of data would firm them up.
+- Assume roughly 1 in 5 category searches becomes an organic click somewhere (the winnable pool). Work out what share of that pool I hold today.
+- Build a scenario table with exactly these rows and columns. Rows: Today, Conservative, Mid, High. Columns: share of the non-branded market, non-branded clicks per year, non-branded revenue per year, new revenue per year. Never model my share above 25% without flagging it. Then state plainly what each extra 1% of market share is worth to me per year.
+- My branded revenue sits on top, unchanged. Say that explicitly.
+
+STEP 7: WRITE THE REPORT
+Five sections, in this order, tight and declarative, no fluff:
+1. Executive summary: three things to know, then the scenario table.
+2. How AI-ready you are today: the /100 scorecard with the four pillars.
+3. The market you're missing: the demand picture, branded vs non-branded, where I rank.
+4. The opportunity, in dollars: the money model and the per-1% figure.
+5. What to do next: the five highest-impact actions in priority order, each 2 to 3 sentences.
+
+Rules for the whole report: plain English, no jargon without a one-line explanation, every number labelled measured or modelled, honest about limitations, and short enough that I'll actually read it. Around 1,200 words.

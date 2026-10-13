@@ -25,6 +25,16 @@ for name in ["m0", "m1", "m2", "m3", "m4"]:
 
 ALL = [l for m in modules for l in m]
 
+# --- drift check: 0.3's prompt must match the community page's ---
+_astro = os.path.join(ROOT, "..", "website", "src", "pages", "community.astro")
+if os.path.exists(_astro):
+    import re
+    _m = re.search(r"const diagnosticPrompt = `(.*?)`;", open(_astro).read(), re.S)
+    _ours = open(os.path.join(HERE, "content", "diagnostic_prompt.txt")).read().strip()
+    if _m and _m.group(1).strip() != _ours:
+        print("  WARNING: diagnostic prompt differs from website/src/pages/community.astro. "
+              "Copy it into generator/content/diagnostic_prompt.txt and rebuild.")
+
 # --- lesson pages ---
 for i, l in enumerate(ALL):
     prev_l = ALL[i - 1] if i > 0 else None

@@ -123,7 +123,7 @@ Analyse: 1) my share of voice per platform (questions where I'm named / total), 
 "lead": "Everything in this playbook, laid end to end as one plan. If you're starting from scratch and want the fastest route to a store that compounds, run these 100 days in this order.",
 "body": """
     <h2>Days 1-10: baseline and open doors</h2>
-    <p>Run Module 0 completely: score yourself (0.2), plug Claude in (0.3), run the 30-minute audit (0.4). Then the two fastest technical wins: unblock every AI crawler (1.1) and verify Search Console (1.9). By day 10 you have a number, a plan, and open doors.</p>
+    <p>Run Module 0 completely: score yourself (0.2), run the diagnostic prompt (0.3), read your report and pick your five actions (0.4). Then the two fastest technical wins: unblock every AI crawler (1.1) and verify Search Console (1.9). By day 10 you have a number, a plan, and open doors.</p>
 
     <h2>Days 11-40: the technical clean-up</h2>
     <p>Module 1, in order of impact: fix the URL traps (1.2), rewrite your top-20 product titles and descriptions (1.3), fill the GTIN gaps and validate schema (1.4), write real copy onto your five biggest collections (1.5), fix the internal link votes (1.6), connect the free feeds (1.7), set your agentic storefront stance (1.8), and clear the speed blockers (1.9). This is the least glamorous month and the highest-certainty gains; most stores finish it already visible in surfaces they'd never appeared in.</p>
@@ -138,9 +138,9 @@ Analyse: 1) my share of voice per platform (questions where I'm named / total), 
     <p>Days 1-40 produce visible technical wins almost immediately. Content and authority compound slower: Google typically takes 60-90 days to fully reflect the changes, and AI answers refresh on their own uneven schedules. The realistic day-100 picture: a meaningfully higher maturity score, your first AI citations on long-tail questions, review velocity climbing, and a trendline that's finally yours. That's the asset, early. The years after are where it gets unfair.</p>
 """,
 "donow": [
-"Open your calendar and block the phases: a day-10 checkpoint, a day-40 checkpoint, day-80, day-100. Put your current 0.2 score in the day-100 event so future-you gets the before-and-after in one glance. Then start day 1, which is literally a 30-minute audit.",
+"Open your calendar and block the phases: a day-10 checkpoint, a day-40 checkpoint, day-80, day-100. Put your current 0.2 score in the day-100 event so future-you gets the before-and-after in one glance. Then start day 1, which is literally running one prompt.",
 ],
-"prompt": """Build my personalised 100-day plan. My 0.2 scorecard: Technical [X], Content [X], Authority [X], Measurement [X]. My quick-win audit results: [paste from 0.4]. My capacity: [X hours/week, who's helping]. Re-sequence the standard plan (days 1-10 baseline, 11-40 technical, 41-80 content, 81-100 authority + proof) around my weakest pillars and real capacity, with a specific checkpoint list for days 10, 40, 80 and 100.""",
+"prompt": """Build my personalised 100-day plan. My 0.2 scorecard: Technical [X], Content [X], Authority [X], Measurement [X]. The five actions from my readiness report: [paste from 0.4]. My capacity: [X hours/week, who's helping]. Re-sequence the standard plan (days 1-10 baseline, 11-40 technical, 41-80 content, 81-100 authority + proof) around my weakest pillars and real capacity, with a specific checkpoint list for days 10, 40, 80 and 100.""",
 "app": True,
 },
 {

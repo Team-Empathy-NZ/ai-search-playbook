@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The 30-minute quick-win audit · The AI Search Playbook · Team Empathy</title>
-<meta name="description" content="A fast, repeatable audit that finds the highest-impact fixes on your Shopify store and turns them into a ranked action plan before you start the real build.">
-<link rel="canonical" href="https://playbook.teamempathy.co.nz/lessons/0-4-the-30-minute-quick-win-audit/">
+<title>Read your report in detail · The AI Search Playbook · Team Empathy</title>
+<meta name="description" content="Walk through your Search & AI readiness report section by section: the score, the market you're missing, the money model and the five actions. Pressure-test it, then turn it into your plan for the rest of the playbook.">
+<link rel="canonical" href="https://playbook.teamempathy.co.nz/lessons/0-4-read-your-report/">
 <link rel="stylesheet" href="../../ds/styles.css">
 <style>
   body { background: var(--paper-50); }
@@ -76,38 +76,59 @@
     <a class="crumb" href="../../">← The AI Search Playbook</a>
     <div style="display: flex; flex-direction: column; gap: 12px;">
       <span class="te-eyebrow">Module 0 · Orientation & baseline · Lesson 0.4</span>
-      <h1 style="font-size: clamp(2rem, 3.4vw, 2.7rem); line-height: 1.08; margin: 0; max-width: 20ch;">The 30-minute quick-win <span class="te-editorial">audit</span></h1>
+      <h1 style="font-size: clamp(2rem, 3.4vw, 2.7rem); line-height: 1.08; margin: 0; max-width: 20ch;">Read your report in <span class="te-editorial">detail</span></h1>
       <div style="display: flex; align-items: center; gap: 14px; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey-400); letter-spacing: var(--ls-wide); text-transform: uppercase;">
-        <span>7 min read</span><span style="opacity:.5;">·</span><span>Baseline</span>
+        <span>8 min read</span><span style="opacity:.5;">·</span><span>Baseline</span>
       </div>
     </div>
-    <p style="font-size: var(--text-lead); color: var(--grey-500); margin: 6px 0 0;">You've got your score and Claude's plugged in. Now run one fast sweep to catch the quick wins, the fixes that take minutes and start paying back straight away.</p>
+    <p style="font-size: var(--text-lead); color: var(--grey-500); margin: 6px 0 0;">You've got a report. Now read it like a strategist would: check what's measured and what's estimated, find the one number that matters most, and turn the five actions into your plan for the modules ahead.</p>
   </div>
 </section>
 
 <section style="padding: 28px 0 16px;">
   <article class="te-container lesson-wrap te-article">
 
-    <h2>Why audit before you build</h2>
-    <p>Most stores are leaking visibility in ways that take 10 minutes to fix and months to notice on their own. Blocked crawlers, empty collection pages, missing product identifiers, supplier descriptions copied onto 40 products. Finding them first means every module you work through lands on a clean foundation.</p>
-    <p>This audit is deliberately shallow and fast. The deep versions live in the modules. This is the sweep that tells you which modules will pay you back fastest.</p>
+    <h2>Before you read: measured or estimated?</h2>
+    <p>Every number in your report should be labelled. <strong>Measured</strong> means it came straight from your data, like Search Console impressions or GA4 revenue. <strong>Directional</strong> or <strong>modelled</strong> means Claude estimated it.</p>
+    <p>Both are useful, but they carry different weight. Make decisions on the measured numbers and treat the estimates as a sense of scale. If a number has no label, ask Claude where it came from before you lean on it.</p>
 
-    <h2>The five checks</h2>
-    <ol>
-      <li><strong>Can AI get in?</strong> Open yourstore.com/robots.txt. Look for GPTBot, ClaudeBot, PerplexityBot or Google-Extended being disallowed. 85% of brands are accidentally blocking AI crawlers, and it's a two-minute fix. <span class="src">(Full fix in lesson 1.1)</span></li>
-      <li><strong>Do your products carry ID?</strong> Pick your three bestsellers and check for barcodes (GTINs) in Shopify admin. 60% of ecommerce catalogues have missing GTINs, and AI shopping surfaces lean on them hard. <span class="src">(Lesson 1.4)</span></li>
-      <li><strong>Are your collections empty?</strong> Open your five biggest collection pages. If they're a grid of products with no copy, you're sitting on your biggest untapped traffic pages. <span class="src">(Lesson 1.5)</span></li>
-      <li><strong>Would AI quote your content?</strong> Open your most recent blog post, if you have one. Does the first paragraph answer a question a buyer would actually ask? Or does it warm up for 200 words first? <span class="src">(Module 2)</span></li>
-      <li><strong>Does anyone vouch for you?</strong> Search your brand name plus "review" and your brand name on Reddit. What comes up is what the AI sees when it decides whether you're safe to recommend. <span class="src">(Module 3)</span></li>
-    </ol>
+    <h2>1. The executive summary</h2>
+    <p>Three things to know, then the scenario table: Today, Conservative, Mid and High. Look at the gap between Today and Conservative first. Conservative is the version you should plan around. High is what it looks like if everything goes right, so don't build your budget on it.</p>
 
-    <h2>Turn it into a ranked plan</h2>
-    <p>Score each check as a pass, a partial, or a fail. Fails on checks 1 and 2 are your first fixes: they're fast and they gate everything else. Fails on 3 and 4 tell you whether Module 1 or Module 2 is your biggest lever. A fail on 5 means Module 3 is where your gap is, and honestly, that's true for most stores.</p>
-    <p>Write the plan down as a list in priority order. As you work through the playbook, this is the list you're crossing off.</p>
+    <h2>2. How AI-ready you are today</h2>
+    <p>Your score out of 100 across the four pillars. Put it next to the score you gave yourself in 0.2. If they're miles apart, find out why: usually you've been generous on a pillar, or Claude couldn't see something you know about.</p>
+    <p>Each pillar points to part of this playbook:</p>
+    <ul>
+      <li><strong>Technical</strong> is Module 1.</li>
+      <li><strong>Content</strong> is Module 2.</li>
+      <li><strong>Authority</strong> is Module 3.</li>
+      <li><strong>Measurement</strong> is Module 4.</li>
+    </ul>
+    <p>Your lowest pillar is the module that will pay you back fastest. 80 is AI-ready, and that's the target.</p>
+
+    <h2>3. The market you're missing</h2>
+    <p>This is the section most people skim, and it's the one that matters most. Check the branded vs non-branded split. Branded searches are people who already know you, and no strategy grows them much. Non-branded is everyone shopping your category who hasn't found you yet. That's the market you can win.</p>
+    <p>Look at which non-branded searches you already appear for, and where you rank. Searches where you're sitting on page two are the closest wins in the whole report.</p>
+
+    <h2>4. The opportunity, in dollars</h2>
+    <p>Three numbers to find:</p>
+    <ul>
+      <li><strong>The value of a non-branded click.</strong> What one visitor from a category search is worth to you.</li>
+      <li><strong>Your share of the market today.</strong> How much of the winnable pool you already hold.</li>
+      <li><strong>The value of each extra 1% of share.</strong> This is the number to remember. It tells you what the work is worth before you start it.</li>
+    </ul>
+    <p>Sanity-check it. Your branded revenue should sit on top, untouched. Any share above 25% should be flagged as a stretch. If the dollar columns are marked directional, the report should tell you which piece of data would firm them up, so go and get it.</p>
+
+    <h2>5. What to do next</h2>
+    <p>Five actions in priority order. Match each one to the lesson that covers it: blocked AI crawlers is 1.1, missing product schema is 1.4, empty collection pages is 1.5, no content answering buyer questions is Module 2, not enough reviews or mentions is Module 3. That list, in that order, is your path through the playbook.</p>
+
+    <h2>Pressure-test it</h2>
+    <p>Claude can be wrong, so check two things yourself before you act. Open yourstore.com/robots.txt and confirm what it said about the AI crawlers. Then ask ChatGPT two or three of the buyer questions from the AI visibility test and see whether the answers match. If something doesn't line up, tell Claude and ask it to rework that section.</p>
 
     <div class="donow">
       <span class="label">Do this now</span>
-      <p>Run the five checks. 30 minutes, tops. Write down your pass/partial/fail for each, then run the prompt below to have Claude turn it into your ranked action plan.</p>
+      <p>Read the report section by section. Write down four things: your score out of 100, your lowest pillar, the value of an extra 1% of market share, and the five actions in order. Then run the prompt below in the same Claude chat to turn them into your plan.</p>
+      <p>Stuck on something in your report? Bring it into the <a href="https://teamempathy.co.nz/community">free community</a>.</p>
     </div>
 
     <div class="te-prompt te-prompt--bare" style="margin-top: 18px;">
@@ -115,14 +136,11 @@
         <span class="te-prompt__label"><span class="te-prompt__dot"></span>Run it with Claude</span>
         <button class="te-prompt__copy" type="button" data-copy="prompt-0-4">Copy</button>
       </div>
-      <pre id="prompt-0-4" class="te-prompt__body">Here are my 30-minute audit results for [yourstore.com]:
-1. AI crawlers allowed: [pass/partial/fail + what you saw]
-2. GTINs on bestsellers: [pass/partial/fail]
-3. Collection pages have copy: [pass/partial/fail]
-4. Content answers questions first: [pass/partial/fail]
-5. Third-party proof (reviews/Reddit): [pass/partial/fail + what you found]
+      <pre id="prompt-0-4" class="te-prompt__body">Now turn this report into my action plan for The AI Search Playbook. The playbook has four modules: Module 1 Technical foundations (crawler access, Shopify URLs, product pages, product schema and GTINs, collections, internal links, merchant feeds, speed), Module 2 Content (buying-intent keywords, topic clusters, buying guides, refreshing content), Module 3 Authority (reviews, review platforms, Reddit and forums, digital PR, founder presence) and Module 4 Measurement.
 
-Turn this into a ranked action plan. For each item: the fix, why it matters for AI search visibility, effort (minutes/hours/days), and expected impact (high/medium/low). Order by impact-per-effort.</pre>
+1. For each of the five actions in the report, tell me which module covers it and why it's in that position.
+2. Tell me which numbers in the report are measured and which are estimates, and which estimate I should firm up first.
+3. Give me the order to work through the modules, starting with my lowest-scoring pillar, and the first three things to do this week.</pre>
     </div>
 
     <div class="app-soon">
@@ -186,8 +204,8 @@ Turn this into a ranked action plan. For each item: the fix, why it matters for 
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "The 30-minute quick-win audit",
-  "description": "A fast, repeatable audit that finds the highest-impact fixes on your Shopify store and turns them into a ranked action plan before you start the real build.",
+  "headline": "Read your report in detail",
+  "description": "Walk through your Search & AI readiness report section by section: the score, the market you're missing, the money model and the five actions. Pressure-test it, then turn it into your plan for the rest of the playbook.",
   "author": { "@type": "Organization", "name": "Team Empathy", "url": "https://teamempathy.co.nz" },
   "publisher": { "@type": "Organization", "name": "Team Empathy" },
   "isPartOf": { "@type": "Course", "name": "The AI Search Playbook for Ecommerce" },
