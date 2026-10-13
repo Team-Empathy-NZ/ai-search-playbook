@@ -29,6 +29,16 @@
   .l-tag[data-s="port"]  { color: var(--royal-600); border-color: color-mix(in oklab, var(--royal) 34%, transparent); background: color-mix(in oklab, var(--royal) 7%, transparent); }
   .l-tag[data-s="new"]   { color: var(--grey-500); border-color: var(--line-200); }
   @media (max-width: 560px) { .l-trio { display: none; } }
+
+  /* Module overview video: a row at the top of the lesson list that opens the video inline */
+  .ov-row { display: flex; align-items: center; gap: 14px; width: 100%; padding: 15px 0; border: 0; border-top: 1px solid var(--line-100); background: none; font: inherit; text-align: left; cursor: pointer; }
+  .ov-play { width: 28px; height: 28px; border-radius: 50%; background: var(--royal); color: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform 140ms ease; }
+  .ov-row:hover .ov-play { transform: scale(1.08); }
+  .ov-row:hover [data-ovtitle] { color: var(--royal); }
+  .ov-chev { color: var(--grey-400); transition: transform 200ms ease; flex-shrink: 0; }
+  .ov-row[aria-expanded="true"] .ov-chev { transform: rotate(180deg); }
+  .ov-player { aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: var(--paper-100); border: 1px solid var(--line-200); margin: 0 0 14px; }
+  .ov-player iframe { width: 100%; height: 100%; border: 0; display: block; }
 </style>
 </head>
 <body>
@@ -156,6 +166,7 @@ const internalStatus = false; // show Loom/SOP/Agent build chips (internal). Set
 
 const ACTS = [
   { num: "0", short: "Orientation", title: "Orientation & baseline", pillar: "Start here",
+    overview: { video: "", mins: 0 }, // paste the Module 0 YouTube link here
     blurb: "Understand what changed, get your score out of 100, plug Claude into your store, and read your own readiness report before you change a thing.",
     lessons: [
       { id: "0.1", title: "The new rules of discovery", covers: "Zero-click, AI shopping, and the entity-confidence thesis.", mins: 7, url: "lessons/0-1-the-new-rules-of-discovery/" },
@@ -244,6 +255,28 @@ function lessonRow(l) {
     </div>`;
 }
 
+// Module overview videos: set overview: { video: "<youtube url>", mins: N } on an ACTS entry.
+// No video = no row. The iframe only loads once someone opens it.
+const openOverview = {};
+function ytId(u) { const m = String(u).match(/(?:v=|youtu\.be\/|\/shorts\/|\/embed\/)([A-Za-z0-9_-]{11})/); return m ? m[1] : String(u).trim(); }
+function overviewRow(a) {
+  if (!a.overview || !a.overview.video) return "";
+  const open = !!openOverview[a.num];
+  const player = open ? `<div class="ov-player"><iframe src="https://www.youtube-nocookie.com/embed/${ytId(a.overview.video)}?autoplay=1&rel=0" title="Module ${a.num} overview" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>` : "";
+  return `<div data-ov="${a.num}">
+      <button type="button" class="ov-row" aria-expanded="${open}">
+        <span class="ov-play"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg></span>
+        <span style="flex:1;min-width:0;">
+          <span data-ovtitle style="display:block;font-size:var(--text-base);color:var(--navy);font-weight:600;transition:color 140ms ease;">Watch the module overview</span>
+          <span style="display:block;font-size:var(--text-sm);color:var(--grey-400);margin-top:3px;line-height:1.45;">One video that walks you through every lesson in this module. Start here.</span>
+        </span>
+        <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--grey-400);white-space:nowrap;">${a.overview.mins ? a.overview.mins + " min" : "Video"}</span>
+        <svg class="ov-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      ${player}
+    </div>`;
+}
+
 function moduleCard(a, current) {
   const raised = a.num === String(current) ? ' te-card--raised' : '';
   const ring = a.num === String(current) ? ' style="border-color: color-mix(in oklab, var(--royal) 30%, transparent);"' : '';
@@ -254,7 +287,7 @@ function moduleCard(a, current) {
       </div>
       <p style="margin:0 0 6px;font-family:var(--font-mono);font-size:var(--text-2xs);letter-spacing:var(--ls-wide);text-transform:uppercase;color:var(--royal-600);">${a.pillar}</p>
       <p style="margin:0 0 12px;font-size:var(--text-base);line-height:1.5;color:var(--grey-500);">${a.blurb}</p>
-      <div style="display:flex;flex-direction:column;">${a.lessons.map(lessonRow).join("")}</div>
+      <div style="display:flex;flex-direction:column;">${overviewRow(a)}${a.lessons.map(lessonRow).join("")}</div>
     </div>`;
 }
 
@@ -308,6 +341,9 @@ function renderAll() {
     row.querySelector("[data-box]").addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); toggle(); });
     const t = row.querySelector("[data-toggle]");
     if (t) t.addEventListener("click", toggle);
+  });
+  document.querySelectorAll("[data-ov] .ov-row").forEach(b => {
+    b.addEventListener("click", () => { const n = b.parentElement.getAttribute("data-ov"); openOverview[n] = !openOverview[n]; renderAll(); });
   });
   renderStepper();
   renderSidebar();
