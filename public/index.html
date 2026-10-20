@@ -30,6 +30,27 @@
   .l-tag[data-s="new"]   { color: var(--grey-500); border-color: var(--line-200); }
   @media (max-width: 560px) { .l-trio { display: none; } }
 
+  /* Sidebar: your score + your revenue potential (both saved in this browser) */
+  .pb-mini { padding: 18px 20px; border-color: color-mix(in oklab, var(--forest) 26%, transparent); background: var(--pale-green); }
+  .pb-mini p { margin: 0; font-size: var(--text-sm); color: var(--grey-700); line-height: 1.55; }
+  .pb-big { font-family: var(--font-display, 'Manrope'); font-weight: 700; color: var(--navy); font-size: 2.6rem; line-height: 1; letter-spacing: -.02em; }
+  .pb-big small { font-size: 1rem; color: var(--grey-400); font-weight: 600; letter-spacing: 0; }
+  .pb-meta { font-family: var(--font-mono); font-size: var(--text-2xs); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--grey-400); }
+  .pb-bars { display: flex; flex-direction: column; gap: 7px; margin: 14px 0; }
+  .pb-bar { display: grid; grid-template-columns: 92px 1fr 40px; align-items: center; gap: 8px; font-size: var(--text-xs); color: var(--grey-700); }
+  .pb-bar__track { display: block; height: 6px; border-radius: 100px; background: color-mix(in oklab, var(--forest) 14%, white); overflow: hidden; }
+  .pb-bar__fill { display: block; height: 100%; border-radius: 100px; background: var(--royal); }
+  .pb-bar b { font-family: var(--font-mono); font-weight: 500; color: var(--grey-500); text-align: right; }
+  .pb-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .pb-link { background: none; border: 0; padding: 0; font: inherit; font-size: var(--text-sm); color: var(--royal); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+  .pb-field { width: 100%; box-sizing: border-box; margin: 10px 0 8px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line-200); background: #fff; font: inherit; font-size: var(--text-sm); color: var(--charcoal); }
+  textarea.pb-field { min-height: 76px; resize: vertical; font-family: var(--font-mono); font-size: var(--text-xs); }
+  .pb-err { color: var(--royal-600); font-size: var(--text-xs); margin-top: 6px !important; }
+  .pb-range { display: flex; justify-content: space-between; gap: 10px; margin-top: 12px; padding-top: 12px; border-top: 1px solid color-mix(in oklab, var(--forest) 18%, transparent); }
+  .pb-range div { display: flex; flex-direction: column; gap: 2px; }
+  .pb-range strong { color: var(--navy); font-size: var(--text-sm); }
+  #pb-prompt { max-height: 230px; overflow: auto; }
+
   /* Module overview video: a row at the top of the lesson list that opens the video inline */
   .ov-row { display: flex; align-items: center; gap: 14px; width: 100%; padding: 15px 0; border: 0; border-top: 1px solid var(--line-100); background: none; font: inherit; text-align: left; cursor: pointer; }
   .ov-play { width: 28px; height: 28px; border-radius: 50%; background: var(--royal); color: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform 140ms ease; }
@@ -52,7 +73,7 @@
       <a href="#cta" style="color: var(--grey-500); font-size: var(--text-sm); font-weight: 500;">The system</a>
       <a href="https://teamempathy.co.nz" style="color: var(--grey-500); font-size: var(--text-sm); font-weight: 500;">About</a>
     </nav>
-    <a class="te-btn te-btn--primary te-btn--sm" href="https://teamempathy.co.nz/scorecard">Get your free score</a>
+    <a class="te-btn te-btn--primary te-btn--sm" href="https://teamempathy.co.nz/scorecard?from=playbook">Get your free score</a>
   </div>
 </header>
 
@@ -87,41 +108,30 @@
   <div data-pbgrid class="te-container" style="display: grid; grid-template-columns: 1.55fr 1fr; gap: 28px; align-items: start;">
     <div id="pb-modules" style="display: flex; flex-direction: column; gap: 18px;"></div>
 
-    <aside data-aside style="position: sticky; top: 100px; display: flex; flex-direction: column; gap: 16px;">
+    <aside data-aside style="display: flex; flex-direction: column; gap: 16px;">
       <div class="te-card te-card--inset">
         <span class="te-eyebrow" style="color: var(--forest);">Continue where you left off</span>
         <h3 id="pb-next-title" style="font-size: var(--text-h4); margin: 10px 0 6px;">The new rules of discovery</h3>
         <p id="pb-next-sub" style="margin: 0 0 14px; font-size: var(--text-sm); color: var(--grey-500);">Module 0, lesson 1. What changed, and why your brand is now optimising to be the answer.</p>
-        <div class="te-prompt te-prompt--bare" style="margin-bottom: 14px;">
+        <div id="pb-prompt-wrap" class="te-prompt te-prompt--bare" style="margin-bottom: 14px;">
           <div class="te-prompt__bar">
             <span class="te-prompt__label"><span class="te-prompt__dot"></span>Lesson prompt</span>
             <button id="pb-copy" class="te-prompt__copy" type="button">Copy</button>
           </div>
-          <pre id="pb-prompt" class="te-prompt__body">Act as an AI search analyst. For my store [URL], list the ten questions a buyer in my category would ask ChatGPT or Perplexity before purchasing, and note whether my brand is likely to be named in the answer today.</pre>
+          <pre id="pb-prompt" class="te-prompt__body"></pre>
         </div>
         <a id="pb-next-cta" class="te-btn te-btn--primary te-btn--block" href="#">Start the lesson</a>
       </div>
 
-      <div class="te-card" style="padding: 18px 20px; border-color: color-mix(in oklab, var(--forest) 26%, transparent); background: var(--pale-green);">
-        <span class="te-eyebrow" style="color: var(--forest);">Your score out of 100</span>
-        <p style="margin: 10px 0 12px; font-size: var(--text-sm); color: var(--grey-700); line-height: 1.55;">Every store gets a score on the AEO Maturity Model. Certified is 80. Get yours free from a live scan of your store, then use lesson 0.2 to read it.</p>
-        <a class="te-btn te-btn--secondary te-btn--sm" href="https://teamempathy.co.nz/scorecard" style="border-color: var(--forest); color: var(--forest);">Get your free score</a>
-      </div>
+      <div id="pb-score" class="te-card pb-mini"></div>
+
+      <div id="pb-report" class="te-card pb-mini"></div>
 
       <div class="te-callout te-callout--takeaway">
         <span class="te-callout__label">Yours to keep</span>
         <div class="te-callout__body"><p>Every lesson, prompt and playbook installs into your business and stays yours. As the models change, we keep the lessons current. Rather not do it by hand? <a href="https://notableaisearch.com">Notable</a>, our AI search platform for Shopify, runs it for you.</p></div>
       </div>
 
-      <div class="te-card" style="padding: 16px 18px;">
-        <span class="te-eyebrow" style="color: var(--grey-400);">What's in a lesson</span>
-        <p style="margin: 10px 0 12px; font-size: var(--text-sm); color: var(--grey-500);">Most lessons include up to three things. Not every one has the full set, and that is fine.</p>
-        <div style="display: flex; flex-direction: column; gap: 8px; font-size: var(--text-sm); color: var(--grey-500);">
-          <span><b style="color: var(--charcoal); font-weight: 600;">Video</b> · a short walkthrough (rolling out lesson by lesson)</span>
-          <span><b style="color: var(--charcoal); font-weight: 600;">SOP</b> · the step-by-step you keep</span>
-          <span><b style="color: var(--charcoal); font-weight: 600;">Agent</b> · a Claude prompt that runs it for you</span>
-        </div>
-      </div>
     </aside>
   </div>
 </section>
@@ -133,7 +143,7 @@
     <h2 style="font-size: clamp(2rem, 3.6vw, 2.8rem); max-width: 22ch; margin: 0; color: #FFFFFF;">Find out where your store <span class="te-editorial">stands</span></h2>
     <p style="color: rgba(255,255,255,0.78); max-width: 52ch; margin: 0;">Get your free AI search score out of 100 from a live scan of your store. Then join the free community and learn alongside other ecommerce founders.</p>
     <div style="display: flex; gap: 12px; margin-top: 6px; flex-wrap: wrap; justify-content: center;">
-      <a class="te-btn te-btn--primary te-btn--lg" href="https://teamempathy.co.nz/scorecard">Get your free score</a>
+      <a class="te-btn te-btn--primary te-btn--lg" href="https://teamempathy.co.nz/scorecard?from=playbook">Get your free score</a>
       <a class="te-btn te-btn--secondary te-btn--lg" href="https://teamempathy.co.nz/community">Join the free community</a>
     </div>
   </div>
@@ -153,6 +163,7 @@
   </div>
 </footer>
 
+<script src="lesson-prompts.js"></script>
 <script>
 /* ============================================================
    The AI Search Playbook — course data + interactivity
@@ -312,6 +323,7 @@ function renderSidebar() {
   const s = document.getElementById("pb-next-sub");
   const cta = document.getElementById("pb-next-cta");
   if (!next) {
+    document.getElementById("pb-prompt-wrap").hidden = true;
     t.textContent = "You have completed the playbook";
     s.textContent = "Re-run your baseline in 4.1 each quarter, and join the free community to keep learning with other ecommerce founders.";
     cta.textContent = "Join the free community";
@@ -321,8 +333,12 @@ function renderSidebar() {
   const act = ACTS.find(a => a.lessons.includes(next));
   t.textContent = next.title;
   s.textContent = `Module ${act.num}, ${act.title}. ${next.mins} minutes. ${next.covers}`;
+  // The next lesson's own prompt; lessons without one (0.2) hide the box.
+  const prompt = (window.LESSON_PROMPTS || {})[next.id] || "";
+  document.getElementById("pb-prompt").textContent = prompt;
+  document.getElementById("pb-prompt-wrap").hidden = !prompt;
   if (next.url) { cta.textContent = "Start the lesson"; cta.href = next.url; cta.style.opacity = ""; cta.style.pointerEvents = ""; }
-  else { cta.textContent = "Get your free score"; cta.href = "https://teamempathy.co.nz/scorecard"; cta.style.opacity = ""; cta.style.pointerEvents = ""; }
+  else { cta.textContent = "Get your free score"; cta.href = "https://teamempathy.co.nz/scorecard?from=playbook"; cta.style.opacity = ""; cta.style.pointerEvents = ""; }
 }
 
 function refreshProgress() {
@@ -358,7 +374,197 @@ document.getElementById("pb-copy").addEventListener("click", () => {
   setTimeout(() => { b.textContent = "Copy"; b.removeAttribute("data-copied"); }, 1600);
 });
 
+/* ======================================================================
+   Your score + your revenue potential. Both live in this browser only
+   (localStorage), like lesson progress. The score is fetched live from the
+   scorecard by its result token, so a rerun shows the new numbers.
+   ====================================================================== */
+const SC_ORIGIN = "https://teamempathy.co.nz";
+const SC_START = SC_ORIGIN + "/scorecard?from=playbook";
+const SCORE_KEY = "te_playbook_score_v1";
+const REPORT_KEY = "te_playbook_report_v1";
+const load = k => { try { return JSON.parse(localStorage.getItem(k) || "null"); } catch (e) { return null; } };
+const store = (k, v) => { try { v === null ? localStorage.removeItem(k) : localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+const nzDate = iso => { try { return new Date(iso).toLocaleDateString("en-NZ", { day: "numeric", month: "short" }); } catch (e) { return ""; } };
+
+function countUp(el, to, fmt) {
+  if (!el) return;
+  const t0 = performance.now(), dur = 900;
+  const step = now => {
+    const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+    el.textContent = fmt(Math.round(to * e));
+    if (k < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+/* A result link, a ?r= link or a bare token all work. */
+function tokenFrom(raw) {
+  const v = String(raw || "").trim();
+  const m = v.match(/\/scorecard\/([A-Za-z0-9-]{8,64})/) || v.match(/[?&]r=([A-Za-z0-9-]{8,64})/) || v.match(/^([A-Za-z0-9-]{8,64})$/);
+  return m ? m[1] : "";
+}
+
+/* Arriving back from the scorecard's "Save to my playbook" button. */
+(function catchReturn() {
+  const u = new URL(location.href);
+  const t = tokenFrom(u.searchParams.get("scorecard"));
+  if (!t) return;
+  store(SCORE_KEY, { token: t, savedAt: new Date().toISOString() });
+  u.searchParams.delete("scorecard");
+  history.replaceState(null, "", u.pathname + (u.search || "") + u.hash);
+})();
+
+let scoreError = "";
+function renderScore() {
+  const box = document.getElementById("pb-score");
+  const saved = load(SCORE_KEY);
+  const r = saved && saved.result;
+  if (!saved || !saved.token) {
+    box.innerHTML = `
+      <span class="te-eyebrow" style="color: var(--forest);">Your AI search score</span>
+      <p style="margin-top: 10px;">Get your free score out of 100 from a live scan of your store. Certified is 80. Save it here and it stays beside your lessons.</p>
+      <div class="pb-actions"><a class="te-btn te-btn--primary te-btn--sm" href="${SC_START}">Get your free score</a></div>
+      <details style="margin-top: 12px;"><summary class="pb-link" style="list-style: none;">Already have a score? Add your result link</summary>
+        <input id="pb-score-in" class="pb-field" type="url" placeholder="teamempathy.co.nz/scorecard/your-store-…">
+        <button id="pb-score-save" class="te-btn te-btn--secondary te-btn--sm" type="button">Save my score</button>
+        ${scoreError ? `<p class="pb-err">${esc(scoreError)}</p>` : ""}
+      </details>`;
+    const btn = document.getElementById("pb-score-save");
+    btn.addEventListener("click", () => {
+      const t = tokenFrom(document.getElementById("pb-score-in").value);
+      if (!t) { scoreError = "That doesn't look like a scorecard result link."; renderScore(); box.querySelector("details").open = true; return; }
+      scoreError = "";
+      store(SCORE_KEY, { token: t, savedAt: new Date().toISOString() });
+      refreshScore();
+    });
+    return;
+  }
+  const resultUrl = `${SC_ORIGIN}/scorecard/${encodeURIComponent(saved.token)}`;
+  if (!r) {
+    box.innerHTML = `<span class="te-eyebrow" style="color: var(--forest);">Your AI search score</span>
+      <p style="margin-top: 10px;">${scoreError ? esc(scoreError) : "Loading your score…"}</p>
+      <div class="pb-actions"><a class="te-btn te-btn--secondary te-btn--sm" href="${SC_START}">Run the scorecard</a><button id="pb-score-clear" class="pb-link" type="button">Remove</button></div>`;
+    document.getElementById("pb-score-clear").addEventListener("click", () => { store(SCORE_KEY, null); scoreError = ""; renderScore(); });
+    return;
+  }
+  const to80 = Math.max(0, 80 - r.total);
+  const bars = (r.pillars || []).map(p => `<div class="pb-bar"><span>${esc(p.name)}</span><span class="pb-bar__track"><span class="pb-bar__fill" style="width:${Math.round(p.points / (p.max || 25) * 100)}%"></span></span><b>${p.points}/${p.max || 25}</b></div>`).join("");
+  box.innerHTML = `
+    <span class="te-eyebrow" style="color: var(--forest);">Your AI search score</span>
+    <div style="display: flex; align-items: baseline; gap: 10px; margin-top: 10px;"><span class="pb-big"><span id="pb-score-num">${r.total}</span><small> / 100</small></span></div>
+    <p style="margin-top: 6px;"><strong style="color: var(--navy);">${esc(r.tier || "")}</strong> · ${to80 ? `${to80} points to Certified (80)` : "Certified AI-ready ✓"}</p>
+    <div class="pb-bars">${bars}</div>
+    <span class="pb-meta">${esc(saved.domain || "")}${saved.createdAt ? " · scored " + esc(nzDate(saved.createdAt)) : ""}</span>
+    <div class="pb-actions">
+      <a class="te-btn te-btn--secondary te-btn--sm" href="${resultUrl}">View your full result</a>
+      <a class="te-btn te-btn--secondary te-btn--sm" href="${SC_START}">Rerun your score</a>
+    </div>`;
+  if (!saved.animated) { countUp(document.getElementById("pb-score-num"), r.total, n => String(n)); saved.animated = true; store(SCORE_KEY, saved); }
+}
+
+async function refreshScore() {
+  const saved = load(SCORE_KEY);
+  if (!saved || !saved.token) return renderScore();
+  renderScore();
+  try {
+    const res = await fetch(`${SC_ORIGIN}/api/scorecard/result/${encodeURIComponent(saved.token)}`);
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || "not_found");
+    const prev = saved.result && saved.result.total;
+    const next = {
+      token: data.token, savedAt: saved.savedAt, createdAt: data.createdAt,
+      domain: (data.url || "").replace(/^https?:\/\//, "").replace(/\/.*$/, ""),
+      result: { total: data.result.total, tier: data.result.tier, pillars: (data.result.pillars || []).map(p => ({ name: p.name, points: p.points, max: p.max })) },
+      animated: prev === data.result.total ? saved.animated : false,
+    };
+    scoreError = "";
+    store(SCORE_KEY, next);
+  } catch (e) {
+    if (!saved.result) scoreError = "We couldn't load that score. Check the link, or run the scorecard again.";
+  }
+  renderScore();
+}
+
+/* ---- Your revenue potential: the PLAYBOOK line from the 0.4 prompt ---- */
+function money(n, cur) {
+  try { return new Intl.NumberFormat("en-NZ", { style: "currency", currency: cur || "NZD", maximumFractionDigits: 0 }).format(n); }
+  catch (e) { return "$" + Math.round(n).toLocaleString("en-NZ"); }
+}
+function num(v) {
+  if (v == null) return null;
+  const m = String(v).replace(/,/g, "").match(/(-?\d+(?:\.\d+)?)\s*([kKmM])?/);
+  if (!m) return null;
+  let n = parseFloat(m[1]);
+  if (m[2] && /k/i.test(m[2])) n *= 1e3;
+  if (m[2] && /m/i.test(m[2])) n *= 1e6;
+  return Math.round(n);
+}
+function parseReportLine(text) {
+  const t = String(text || "").replace(/\*\*/g, "");
+  const grab = re => { const m = t.match(re); return m ? m[1].trim() : null; };
+  const out = {
+    score: num(grab(/score\s*:\s*([^|\n]+)/i)),
+    per1: num(grab(/per\s*1\s*%\s*:\s*([^|\n]+)/i)),
+    conservative: num(grab(/conservative\s*:\s*([^|\n]+)/i)),
+    mid: num(grab(/mid\s*:\s*([^|\n]+)/i)),
+    high: num(grab(/high\s*:\s*([^|\n]+)/i)),
+    currency: (grab(/currency\s*:\s*([A-Za-z]{3})/i) || "NZD").toUpperCase(),
+  };
+  return out.mid != null ? out : null;
+}
+
+let reportEditing = false, reportError = "";
+const ASK_LINE = "Give me the PLAYBOOK line for this report: PLAYBOOK | score: [x]/100 | per 1%: $[x] | conservative: $[x] | mid: $[x] | high: $[x] | currency: [NZD/AUD/USD/GBP]";
+function renderReport() {
+  const box = document.getElementById("pb-report");
+  const rep = load(REPORT_KEY);
+  if (!rep || reportEditing) {
+    box.innerHTML = `
+      <span class="te-eyebrow" style="color: var(--forest);">Your revenue potential</span>
+      <p style="margin-top: 10px;">Run the readiness report in <a href="lessons/0-3-plug-claude-into-your-store/">lesson 0.3</a>, then paste the <strong>PLAYBOOK</strong> line from the end of it (<a href="lessons/0-4-read-your-report/">lesson 0.4</a> gets Claude to write it).</p>
+      <textarea id="pb-report-in" class="pb-field" placeholder="PLAYBOOK | score: 52/100 | per 1%: $14,000 | conservative: …"></textarea>
+      ${reportError ? `<p class="pb-err">${esc(reportError)}</p>` : ""}
+      <div class="pb-actions" style="margin-top: 4px;">
+        <button id="pb-report-save" class="te-btn te-btn--primary te-btn--sm" type="button">Save</button>
+        <button id="pb-report-ask" class="pb-link" type="button">No line? Copy the ask for Claude</button>
+        ${rep ? `<button id="pb-report-cancel" class="pb-link" type="button">Cancel</button>` : ""}
+      </div>`;
+    document.getElementById("pb-report-save").addEventListener("click", () => {
+      const parsed = parseReportLine(document.getElementById("pb-report-in").value);
+      if (!parsed) { reportError = "We couldn't find the figures in that. Paste the whole PLAYBOOK line, including mid: $…"; renderReport(); return; }
+      reportError = ""; reportEditing = false;
+      store(REPORT_KEY, { ...parsed, savedAt: new Date().toISOString(), animated: false });
+      renderReport();
+    });
+    document.getElementById("pb-report-ask").addEventListener("click", e => {
+      if (navigator.clipboard) navigator.clipboard.writeText(ASK_LINE);
+      e.target.textContent = "Copied. Paste it into the same Claude chat";
+    });
+    const c = document.getElementById("pb-report-cancel");
+    if (c) c.addEventListener("click", () => { reportEditing = false; reportError = ""; renderReport(); });
+    return;
+  }
+  const cur = rep.currency;
+  box.innerHTML = `
+    <span class="te-eyebrow" style="color: var(--forest);">Your revenue potential</span>
+    <div class="pb-big" style="margin-top: 10px;"><span id="pb-rev-num">${money(rep.mid, cur)}</span><small> a year</small></div>
+    <p style="margin-top: 6px;">New revenue from non-branded search at the <strong style="color: var(--navy);">mid</strong> scenario in your report.</p>
+    <div class="pb-range">
+      ${rep.conservative != null ? `<div><span class="pb-meta">Conservative</span><strong>${money(rep.conservative, cur)}</strong></div>` : ""}
+      ${rep.high != null ? `<div><span class="pb-meta">High</span><strong>${money(rep.high, cur)}</strong></div>` : ""}
+      ${rep.per1 != null ? `<div><span class="pb-meta">Each extra 1%</span><strong>${money(rep.per1, cur)}</strong></div>` : ""}
+    </div>
+    <span class="pb-meta" style="display: block; margin-top: 12px;">${rep.score != null ? `Report score ${rep.score}/100 · ` : ""}saved ${esc(nzDate(rep.savedAt))}</span>
+    <div class="pb-actions"><button id="pb-report-edit" class="pb-link" type="button">Update from a new report</button></div>`;
+  document.getElementById("pb-report-edit").addEventListener("click", () => { reportEditing = true; renderReport(); });
+  if (!rep.animated) { countUp(document.getElementById("pb-rev-num"), rep.mid, n => money(n, cur)); rep.animated = true; store(REPORT_KEY, rep); }
+}
+
 renderAll();
+refreshScore();
+renderReport();
 </script>
 </body>
 </html>

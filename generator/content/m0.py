@@ -98,7 +98,7 @@ LESSONS = [
 """,
 "donow": [
 "Score each pillar 1 to 5, multiply each by 5, and add them up. Write down the four pillar scores and the total, plus today's date. That number is your baseline.",
-"Want it done properly? <a href=\"https://teamempathy.co.nz/scorecard\">Get your free score here</a>. It runs a live scan of your store and scores all four pillars for you.",
+"Want it done properly? <a href=\"https://teamempathy.co.nz/scorecard?from=playbook\">Get your free score here</a>. It runs a live scan of your store and scores all four pillars for you.",
 ],
 "app": True,
 },
@@ -204,13 +204,16 @@ LESSONS = [
 """,
 "donow": [
 "Read the report section by section. Write down four things: your score out of 100, your lowest pillar, the value of an extra 1% of market share, and the five actions in order. Then run the prompt below in the same Claude chat to turn them into your plan.",
+"Copy the PLAYBOOK line Claude gives you at the end and paste it into the <strong>Your revenue potential</strong> box on the <a href=\"../../\">playbook home page</a>. Your score and what the opportunity is worth stay pinned there while you work through the modules.",
 "Stuck on something in your report? Bring it into the <a href=\"https://teamempathy.co.nz/community\">free community</a>.",
 ],
 "prompt": """Now turn this report into my action plan for The AI Search Playbook. The playbook has four modules: Module 1 Technical foundations (crawler access, Shopify URLs, product pages, product schema and GTINs, collections, internal links, merchant feeds, speed), Module 2 Content (buying-intent keywords, topic clusters, buying guides, refreshing content), Module 3 Authority (reviews, review platforms, Reddit and forums, digital PR, founder presence) and Module 4 Measurement.
 
 1. For each of the five actions in the report, tell me which module covers it and why it's in that position.
 2. Tell me which numbers in the report are measured and which are estimates, and which estimate I should firm up first.
-3. Give me the order to work through the modules, starting with my lowest-scoring pillar, and the first three things to do this week.""",
+3. Give me the order to work through the modules, starting with my lowest-scoring pillar, and the first three things to do this week.
+4. Finish with one line I can paste into the playbook, exactly in this format, using the figures from your report (whole numbers, per year, no ranges):
+PLAYBOOK | score: [x]/100 | per 1%: $[x] | conservative: $[x] | mid: $[x] | high: $[x] | currency: [NZD/AUD/USD/GBP]""",
 "app": True,
 },
 ]

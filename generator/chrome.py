@@ -76,7 +76,7 @@ HEAD = """<!DOCTYPE html>
       <a href="../../#cta" style="color: var(--grey-500); font-size: var(--text-sm); font-weight: 500;">The system</a>
       <a href="https://teamempathy.co.nz" style="color: var(--grey-500); font-size: var(--text-sm); font-weight: 500;">About</a>
     </nav>
-    <a class="te-btn te-btn--primary te-btn--sm" href="https://teamempathy.co.nz/scorecard">Get your free score</a>
+    <a class="te-btn te-btn--primary te-btn--sm" href="https://teamempathy.co.nz/scorecard?from=playbook">Get your free score</a>
   </div>
 </header>
 
@@ -105,14 +105,7 @@ HEAD = """<!DOCTYPE html>
 
 <section style="padding: 16px 0 64px;">
   <div class="te-container lesson-wrap" style="display: flex; flex-direction: column; gap: 16px;">
-    <div class="score-card">
-      <div>
-        <h3>How AI-ready is your store?</h3>
-        <p>Get your free score out of 100. It comes from a live scan of your actual site, so it shows you where to start.</p>
-      </div>
-      <a class="te-btn te-btn--primary" href="https://teamempathy.co.nz/scorecard">Get your free score</a>
-    </div>
-    <div class="te-card te-card--raised" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
+{score_html}    <div class="te-card te-card--raised" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
       <div>
         <h3 style="font-size: var(--text-h4); margin: 0 0 4px;">Done with this lesson?</h3>
         <p style="margin: 0; font-size: var(--text-sm); color: var(--grey-500);">Mark it complete and your progress saves automatically.</p>
@@ -132,7 +125,7 @@ HEAD = """<!DOCTYPE html>
     <h2 style="font-size: clamp(2rem, 3.6vw, 2.8rem); max-width: 22ch; margin: 0; color: #FFFFFF;">Find out where your store <span class="te-editorial">stands</span></h2>
     <p style="color: rgba(255,255,255,0.78); max-width: 52ch; margin: 0;">Get your free AI search score out of 100 from a live scan of your store. Then join the free community and learn alongside other ecommerce founders.</p>
     <div style="display: flex; gap: 12px; margin-top: 6px; flex-wrap: wrap; justify-content: center;">
-      <a class="te-btn te-btn--primary te-btn--lg" href="https://teamempathy.co.nz/scorecard">Get your free score</a>
+      <a class="te-btn te-btn--primary te-btn--lg" href="https://teamempathy.co.nz/scorecard?from=playbook">Get your free score</a>
       <a class="te-btn te-btn--secondary te-btn--lg" href="https://teamempathy.co.nz/community">Join the free community</a>
     </div>
   </div>
@@ -251,6 +244,20 @@ def render_lesson(l, prev_l, next_l, prompt_counter=[0]):
             "    </div>\n"
         )
 
+    # The free-score card belongs to Module 0 (orientation); later lessons stay
+    # focused on the work itself.
+    score_html = ""
+    if mod == "0":
+        score_html = (
+            '    <div class="score-card">\n'
+            '      <div>\n'
+            '        <h3>How AI-ready is your store?</h3>\n'
+            '        <p>Get your free score out of 100. It comes from a live scan of your actual site, so it shows you where to start.</p>\n'
+            '      </div>\n'
+            '      <a class="te-btn te-btn--primary" href="https://teamempathy.co.nz/scorecard?from=playbook">Get your free score</a>\n'
+            '    </div>\n'
+        )
+
     video_html = ""
     if l.get("video"):
         vid = youtube_id(l["video"])
@@ -289,6 +296,7 @@ def render_lesson(l, prev_l, next_l, prompt_counter=[0]):
         prompt_html=prompt_html,
         app_html=app_html,
         video_html=video_html,
+        score_html=score_html,
         prev_link=prev_link,
         next_link=next_link,
     )
