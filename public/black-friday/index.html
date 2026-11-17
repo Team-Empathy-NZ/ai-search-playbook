@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en-NZ" data-font="brand">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Black Friday AI Check · The AI Search Playbook · Team Empathy</title>
+<meta name="description" content="A free Claude skill for Shopify founders. In about 30 minutes it checks AI shopping tools can see your store, finds the questions shoppers really ask, and writes FAQ answers for your top products before Black Friday.">
+<link rel="canonical" href="https://playbook.teamempathy.co.nz/black-friday/">
+<link rel="stylesheet" href="../ds/styles.css">
+<style>
+  body { background: var(--paper-50); }
+  .lesson-wrap { max-width: 760px; }
+  .crumb { display: inline-flex; align-items: center; gap: 8px; color: var(--grey-500); font-size: var(--text-sm); font-weight: 500; text-decoration: none; }
+  .crumb:hover { color: var(--royal); }
+
+  .te-article { color: var(--charcoal); font-size: 1.0625rem; line-height: 1.72; }
+  .te-article > p { margin: 0 0 20px; }
+  .te-article h2 { font-family: var(--font-display, 'Manrope'); color: var(--navy); font-size: 1.5rem; line-height: 1.2; letter-spacing: -.01em; margin: 44px 0 14px; }
+  .te-article h3 { font-family: var(--font-display, 'Manrope'); color: var(--navy); font-size: 1.15rem; margin: 26px 0 10px; }
+  .te-article ul, .te-article ol { margin: 0 0 20px; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .te-article ul li, .te-article ol li { position: relative; padding-left: 26px; }
+  .te-article ul li::before { content: ""; position: absolute; left: 4px; top: 11px; width: 7px; height: 7px; border-radius: 50%; background: var(--royal); }
+  .te-article ol { counter-reset: telist; }
+  .te-article ol li { counter-increment: telist; padding-left: 32px; }
+  .te-article ol li::before { content: counter(telist); position: absolute; left: 0; top: 2px; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--royal-600); font-weight: 600; border: 1px solid var(--line-200); border-radius: 6px; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
+  .te-article strong { color: var(--navy); font-weight: 600; }
+  .te-article a { color: var(--royal); }
+  .te-article code { font-family: var(--font-mono); font-size: .9em; background: var(--paper-100); border: 1px solid var(--line-200); border-radius: 6px; padding: 1px 6px; }
+  .src { color: var(--grey-400); font-size: 0.875em; }
+
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 8px 0 24px; }
+  .stat { padding: 20px 22px; border-radius: 16px; background: var(--pale-blue); border: 1px solid color-mix(in oklab, var(--royal) 22%, transparent); }
+  .stat b { display: block; font-family: var(--font-display, 'Manrope'); font-size: 2rem; line-height: 1.1; color: var(--navy); margin-bottom: 6px; }
+  .stat span { display: block; font-size: var(--text-sm); color: var(--grey-700); line-height: 1.5; }
+  .stat small { display: block; margin-top: 8px; font-size: var(--text-xs); color: var(--grey-500); }
+
+  .parts { display: grid; gap: 14px; margin: 8px 0 24px; }
+  .part { display: flex; gap: 16px; padding: 18px 20px; border-radius: 14px; background: #FFFFFF; border: 1px solid var(--line-200); }
+  .part .n { flex-shrink: 0; width: 34px; height: 34px; border-radius: 10px; background: var(--navy); color: #FFFFFF; font-family: var(--font-mono); font-weight: 600; display: flex; align-items: center; justify-content: center; }
+  .part h3 { margin: 2px 0 4px; font-size: 1.05rem; }
+  .part p { margin: 0; font-size: 1rem; color: var(--grey-700); line-height: 1.6; }
+
+  .step { margin: 0 0 18px; padding: 20px 22px; border-radius: 16px; background: #FFFFFF; border: 1px solid var(--line-200); }
+  .step .label { display: block; margin-bottom: 6px; font-family: var(--font-mono); font-size: var(--text-2xs); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--royal-600); font-weight: 600; }
+  .step h3 { margin: 0 0 8px; }
+  .step p { margin: 0 0 10px; font-size: 1rem; line-height: 1.6; }
+  .step p:last-child { margin-bottom: 0; }
+  .step ol, .step ul { margin-bottom: 4px; gap: 8px; font-size: 1rem; }
+
+  .choice { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 10px 0 24px; }
+  .opt { padding: 20px 22px; border-radius: 16px; border: 1px solid var(--line-200); background: #FFFFFF; }
+  .opt.b { background: var(--pale-green); border-color: color-mix(in oklab, var(--forest) 30%, transparent); }
+  .opt .tag { display: inline-block; margin-bottom: 8px; font-family: var(--font-mono); font-size: var(--text-2xs); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--grey-500); font-weight: 600; }
+  .opt.b .tag { color: var(--forest); }
+  .opt h3 { margin: 0 0 8px; }
+  .opt p { margin: 0 0 8px; font-size: 1rem; line-height: 1.6; }
+  .opt p:last-child { margin-bottom: 0; }
+
+  .note { margin: 22px 0; padding: 18px 22px; border-radius: 14px; background: var(--paper-100); border: 1px dashed var(--line-300); font-size: 1rem; line-height: 1.6; }
+  .note b { color: var(--navy); }
+
+  .donow { margin: 36px 0 8px; padding: 22px 24px; border-radius: 16px; background: var(--pale-green); border: 1px solid color-mix(in oklab, var(--forest) 24%, transparent); }
+  .donow .label { display: block; margin-bottom: 10px; font-family: var(--font-mono); font-size: var(--text-2xs); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--forest); font-weight: 600; }
+  .donow p { margin: 0 0 10px; font-size: 1rem; line-height: 1.6; color: var(--charcoal); }
+  .donow p:last-child { margin-bottom: 0; }
+
+  figure.shot { margin: 18px 0 28px; }
+  figure.shot img { width: 100%; display: block; border-radius: 14px; border: 1px solid var(--line-200); }
+  figure.shot figcaption { margin-top: 8px; font-size: var(--text-sm); color: var(--grey-500); }
+
+  .dl { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 4px; }
+
+  @media (max-width: 640px) { .te-article h2 { font-size: 1.3rem; } .stat b { font-size: 1.7rem; } }
+</style>
+</head>
+<body>
+
+<header style="position: sticky; top: 0; z-index: 100; background: rgba(251,252,251,0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line-100);">
+  <div class="te-container" style="display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px;">
+    <a href="../" style="display: inline-flex;"><img src="../img/logo-wordmark-royal.png" alt="Team Empathy" style="height: 32px; display: block;"></a>
+    <a class="te-btn te-btn--primary te-btn--sm" href="black-friday-ai-check.zip" download>Download the skill</a>
+  </div>
+</header>
+
+<section style="position: relative; padding: 40px 0 8px;">
+  <div class="te-container lesson-wrap" style="display: flex; flex-direction: column; gap: 18px;">
+    <a class="crumb" href="../">← The AI Search Playbook</a>
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <span class="te-eyebrow">Free Claude skill · Black Friday 2026</span>
+      <h1 style="font-size: clamp(2rem, 3.4vw, 2.7rem); line-height: 1.08; margin: 0; max-width: 22ch;">Get your store ready for AI shoppers this <span class="te-editorial">Black Friday</span></h1>
+      <div style="display: flex; align-items: center; gap: 14px; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--grey-400); letter-spacing: var(--ls-wide); text-transform: uppercase;">
+        <span>10 min setup + 30 min check</span><span style="opacity:.5;">·</span><span>Finish by Mon 23 Nov</span>
+      </div>
+    </div>
+    <p style="font-size: var(--text-lead); color: var(--grey-500); margin: 6px 0 0;">A free skill for Claude. You chat to it in plain English and it checks AI shopping tools can see your store, finds the questions shoppers really ask about your best sellers, and writes the answers for your product pages. You stay in charge the whole way.</p>
+  </div>
+</section>
+
+<section style="padding: 28px 0 16px;">
+  <article class="te-container lesson-wrap te-article">
+
+    <h2>Why bother this week</h2>
+    <p>More shoppers now ask ChatGPT, Google AI Mode, Gemini and Perplexity for deals and gift ideas. Those shoppers show up ready to buy.</p>
+    <div class="stats">
+      <div class="stat"><b>38% → 31%</b><span>Adobe found shoppers arriving from AI were 38% less likely to buy in April 2025, and 31% more likely across the 2025 holiday season.</span><small>Adobe Analytics, US retail data</small></div>
+      <div class="stat"><b>8x</b><span>AI-driven traffic to Shopify stores, year on year, with orders from AI searches up nearly 13x.</span><small>Shopify, Q1 2026 earnings call</small></div>
+    </div>
+    <p>AI tools answer from what's on your page, so pages that answer "will it arrive before Christmas?" or "what size do I need?" give them something to use. The health check is the quick win this week. The FAQs keep building into Christmas and beyond.</p>
+
+    <h2>What the skill does</h2>
+    <div class="parts">
+      <div class="part"><span class="n">1</span><div><h3>Five-minute health check</h3><p>Is your store open to the public? Are your policies filled in? Are Shopify's AI channels on? Is anything blocking AI crawlers? Plus a quick Google Merchant Center checklist.</p></div></div>
+      <div class="part"><span class="n">2</span><div><h3>Find the real questions</h3><p>For your top products, Claude gathers the questions shoppers actually ask: from your customers, Reddit, Quora and reviews. Every question shows where it came from. Nothing made up.</p></div></div>
+      <div class="part"><span class="n">3</span><div><h3>Write the answers</h3><p>Short, clear FAQ answers using only facts from your page or from you. You read and fix them, then paste them in or have Claude add them for you, one product at a time.</p></div></div>
+    </div>
+
+    <h2>What you need</h2>
+    <ul>
+      <li><strong>A paid Claude plan</strong> (Pro or higher) at <a href="https://claude.ai">claude.ai</a>.</li>
+      <li><strong>Admin access to your Shopify store</strong> with permission to edit products.</li>
+      <li><strong>Your 3 to 5 best sellers</strong> in mind, and the questions customers email you about most.</li>
+    </ul>
+
+    <h2>Set it up (about 10 minutes, once)</h2>
+
+    <div class="step">
+      <span class="label">Step 1</span>
+      <h3>Download the skill</h3>
+      <div class="dl"><a class="te-btn te-btn--primary" href="black-friday-ai-check.zip" download>Download black-friday-ai-check.zip</a><span class="src">5 KB. Don't unzip it. If your Mac unzipped it for you, right-click the folder and choose Compress to turn it back into a zip.</span></div>
+    </div>
+
+    <div class="step">
+      <span class="label">Step 2</span>
+      <h3>Add it to Claude</h3>
+      <ol>
+        <li>In Claude, open <strong>Settings &gt; Capabilities</strong> and make sure <strong>Code execution and file creation</strong> is on. Skills need it.</li>
+        <li>Open the skills area. It's under <strong>Customize &gt; Skills</strong> or <strong>Plugins</strong> in the left sidebar, depending on your plan.</li>
+        <li>Click <strong>Add</strong> (or <strong>+</strong>), then <strong>Upload</strong>, and choose the zip you downloaded.</li>
+        <li>Click <strong>Upload</strong>. You'll see "Black friday ai check" in your list.</li>
+      </ol>
+    </div>
+
+    <div class="step">
+      <span class="label">Step 3</span>
+      <h3>Connect your Shopify store</h3>
+      <ol>
+        <li>Go to <a href="https://claude.ai/directory/connectors/shopify">Shopify in Claude's directory</a> and click <strong>Connect</strong>. It's Shopify's official connector, so there are no codes or developer settings.</li>
+        <li>The first time Claude uses it, you'll see <strong>Authorization required</strong> in the chat. Click <strong>Reconnect</strong>, choose your store, then click <strong>Install</strong> in Shopify.</li>
+      </ol>
+      <p><strong>About the permissions:</strong> Shopify asks to "view and edit store data". That's how the connector works for everyone. The skill only ever adds FAQs to product descriptions, and only after you say yes (see the rules below). You can remove it any time in Shopify under <strong>Settings &gt; Apps</strong>.</p>
+      <p>Rather not connect it? Skip this step. Everything works except "add it for me", and you paste the answers in yourself.</p>
+    </div>
+
+    <div class="step">
+      <span class="label">Step 4</span>
+      <h3>Back up your products</h3>
+      <p>In Shopify, go to <strong>Products &gt; Export</strong>, choose all products, CSV, and export. Thirty seconds, and you've got a copy of every description just in case.</p>
+    </div>
+
+    <div class="step">
+      <span class="label">Step 5</span>
+      <h3>Start the check</h3>
+      <p>Open a new chat in Claude, make sure web search is on, and type:</p>
+      <p><code>Run my Black Friday AI check. My store is yourstore.com</code></p>
+      <p>Then just chat. Claude explains each part, asks what it needs, and waits for you.</p>
+    </div>
+
+    <h2>Putting the answers on your store</h2>
+    <p>Once you've read and approved the answers for a product, Claude asks how you want to add them. Pick either, every time:</p>
+    <div class="choice">
+      <div class="opt">
+        <span class="tag">Option A</span>
+        <h3>I'll paste them in myself</h3>
+        <p>Claude gives you a ready block. In Shopify, open the product, click the <strong>&lt;/&gt;</strong> button in the description toolbar, paste the block at the very end, click <strong>&lt;/&gt;</strong> again and <strong>Save</strong>.</p>
+      </div>
+      <div class="opt b">
+        <span class="tag">Option B</span>
+        <h3>Add it for me</h3>
+        <p>Just say "B" or "add it for me". Claude shows you exactly how the description will look, keeps a copy of your original, waits for your yes, then adds the FAQ to the bottom of that one product.</p>
+        <p>It checks the change worked and asks you to look at the live page. Changed your mind? Say "undo it" and your original goes back.</p>
+      </div>
+    </div>
+    <figure class="shot">
+      <img src="../img/black-friday-faq-example.jpg" alt="A Shopify product page with a Frequently asked questions section added below the description" loading="lazy">
+      <figcaption>What it looks like: tested on our demo store, added with option B. Your theme's fonts and colours carry through.</figcaption>
+    </figure>
+
+    <h2>The rules (please read)</h2>
+    <ul>
+      <li><strong>You're in charge, and it's your store.</strong> Claude suggests and you decide. Read every answer before it goes on.</li>
+      <li><strong>The only thing Claude changes</strong> is adding an FAQ to the bottom of a product description. Never prices, stock, discounts, titles, images, product status, collections, your theme or settings.</li>
+      <li><strong>No made-up facts.</strong> If Claude isn't sure about a delivery date, return terms or sizing, it writes <code>[CONFIRM]</code> and asks you. Fill every one in.</li>
+      <li><strong>One product at a time.</strong> Check each page looks right before moving on. If your theme shows it oddly, undo it and paste instead.</li>
+      <li><strong>Finish by Mon 23 Nov, then freeze store changes from Tue 24 Nov.</strong> Black Friday week isn't the time for experiments.</li>
+    </ul>
+
+    <div class="note"><b>Can't upload skills?</b> Copy the prompt below into a new Claude chat instead. It runs the same three parts with the same rules. Fill in your store and products at the top.</div>
+
+    <div class="te-prompt te-prompt--bare" style="margin-top: 6px;">
+      <div class="te-prompt__bar">
+        <span class="te-prompt__label"><span class="te-prompt__dot"></span>The Black Friday AI check (paste-in version)</span>
+        <button class="te-prompt__copy" type="button" data-copy="prompt-bf">Copy</button>
+      </div>
+      <pre id="prompt-bf" class="te-prompt__body">I run a Shopify store and I want it ready for shoppers who use ChatGPT, Google AI Mode, Gemini and Perplexity before Black Friday. Walk me through this one step at a time, in plain English, with short messages. I'm in charge: you suggest, I decide.
+
+MY STORE: [yourstore.com]
+MY TOP PRODUCTS: [3 to 5 product names or links]
+
+RULES
+- The only thing you may ever change is a product description, and only by adding an FAQ block at the bottom (or undoing that). Never prices, stock, discounts, titles, SEO fields, tags, images, variants, product status, collections, the theme or any setting, even if I ask mid-way.
+- Never invent facts (shipping times, Christmas cut-offs, return terms, sizing, health or safety claims). If you're not sure, write [CONFIRM: what you need] and ask me.
+- Never offer to put anything on my store while a [CONFIRM] is still in the text.
+- Nothing goes on my store until I've read it and said yes.
+- Store changes finish by Mon 23 Nov 2026. From Tue 24 Nov until after Cyber Monday, do parts 1 and 2 and draft answers, but tell me to hold changes.
+
+PART 1: HEALTH CHECK (give each a ✅ / ⚠️ / ❌)
+- Is my store open to the public, or is there a password page?
+- Are my Terms of service, Privacy policy and Return and refund policy filled in?
+- Ask me what's listed under Sales channels &gt; Agentic in Shopify. ChatGPT and Copilot only show stores that sell to the US. Switching a channel off can take up to 7 days, so tell me not to fiddle this week.
+- Fetch my robots.txt and check OAI-SearchBot, ChatGPT-User, PerplexityBot, Googlebot and Bingbot aren't blocked. Only flag it if one of those bots, or User-agent: *, has Disallow: / (the whole site). Rules for /cart, /checkout, /admin or other bots are normal.
+- Ask whether I use Cloudflare, and if so to check its AI bot settings aren't blocking AI search crawlers.
+- Give me a Google Merchant Center checklist: sale price with dates, a Black Friday promotion submitted early if Promotions is available in my country, shipping and returns set up, feed prices and stock match the website.
+
+PART 2: REAL QUESTIONS
+For each product, ask me the 5 things customers ask most. Then search Reddit, Quora and reviews (mine and competitors') for real shopper questions, plus Black Friday and gifting questions my store can actually answer. Show each question with its source. Never make questions up. Recommend the best 4 to 6 per product, with no more than 2 store-wide ones (shipping, returns). Wait for me to choose.
+
+PART 3: ANSWERS
+Read my product page. For each chosen question, write the answer first, then one or two sentences of detail, using only facts from my page or from me, in my brand's tone and my market's spelling. Show me the drafts and wait for my edits. Once I approve a product, give me two options:
+A) A ready HTML block (&lt;h3&gt;Frequently asked questions&lt;/h3&gt; then &lt;p&gt;&lt;strong&gt;Question?&lt;/strong&gt;&lt;br&gt;Answer.&lt;/p&gt; for each), with steps to paste it at the end of my product description using the &lt;/&gt; button in Shopify.
+B) If the Shopify connector is connected, add it for me: read the current description fresh. If it already has a "Frequently asked questions" section, stop and ask me. Show me my original to keep for undo, show the new version (original unchanged, FAQ at the bottom), wait for my yes, update that one product only, read it back to confirm, and ask me to check the live page. If it looks odd on my theme, put the original back and give me option A. If anything fails, don't retry in a loop: tell me in one line and give me option A.
+To undo: read the description fresh. If it still matches what you wrote, put my original back. If someone has edited it since, show me the difference and ask first.
+One product at a time.
+
+In the HTML block, write & as &amp;amp;.
+
+Finish with what's done, what's left for me to do, and a reminder to freeze store changes from Tue 24 Nov.</pre>
+    </div>
+
+    <h2>After Black Friday</h2>
+    <p>Keep the questions Claude found. They're perfect topics for two or three Christmas gift guides. When you're ready, ask Claude: "Plan me two or three gift guides for Christmas using the questions we found."</p>
+
+    <div class="donow">
+      <span class="label">Do this now</span>
+      <p>Download the skill, connect Shopify, and run the check on your top 3 to 5 products today. It keeps working long after the sale.</p>
+      <p>Stuck, or want a second pair of eyes? Bring it to the AI Search &amp; SEO gym in The E-Commerce Accelerator on Tuesdays.</p>
+    </div>
+
+  </article>
+</section>
+
+<footer id="cta" data-theme="forest" class="te-atmos te-grid-fade" style="position: relative; overflow: hidden; margin-top: 48px;">
+  <div class="te-container" style="position: relative; z-index: 1; padding-top: 80px; padding-bottom: 60px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+    <span class="te-eyebrow" style="color: var(--sky);">Your next step</span>
+    <h2 style="font-size: clamp(2rem, 3.6vw, 2.8rem); max-width: 22ch; margin: 0; color: #FFFFFF;">Find out where your store <span class="te-editorial">stands</span></h2>
+    <p style="color: rgba(255,255,255,0.78); max-width: 52ch; margin: 0;">Get your free AI search score out of 100 from a live scan of your store, then work through the rest of the playbook.</p>
+    <div style="display: flex; gap: 12px; margin-top: 6px; flex-wrap: wrap; justify-content: center;">
+      <a class="te-btn te-btn--primary te-btn--lg" href="https://teamempathy.co.nz/scorecard?from=black-friday">Get your free score</a>
+      <a class="te-btn te-btn--secondary te-btn--lg" href="../">The AI Search Playbook</a>
+    </div>
+  </div>
+  <div class="te-container" style="position: relative; z-index: 1;">
+    <div style="border-top: 1px solid rgba(255,255,255,0.10); padding-top: 16px; padding-bottom: 30px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-family: var(--font-mono); font-size: var(--text-2xs); letter-spacing: var(--ls-wide); text-transform: uppercase; color: rgba(255,255,255,0.6);">
+      <span>© 2026 Team Empathy · The AI Search Playbook</span>
+      <span>Made in Aotearoa New Zealand 🌿</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll("[data-copy]").forEach(b => {
+  b.addEventListener("click", () => {
+    const pre = document.getElementById(b.getAttribute("data-copy"));
+    if (pre && navigator.clipboard) navigator.clipboard.writeText(pre.innerText);
+    const old = b.textContent; b.textContent = "Copied"; b.setAttribute("data-copied", "true");
+    setTimeout(() => { b.textContent = old; b.removeAttribute("data-copied"); }, 1600);
+  });
+});
+</script>
+</body>
+</html>
