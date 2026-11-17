@@ -69,6 +69,7 @@
   figure.shot figcaption { margin-top: 8px; font-size: var(--text-sm); color: var(--grey-500); }
 
   .dl { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 4px; }
+  .te-article a.te-btn--primary { color: var(--accent-ink); text-decoration: none; }
 
   @media (max-width: 640px) { .te-article h2 { font-size: 1.3rem; } .stat b { font-size: 1.7rem; } }
 </style>
@@ -126,7 +127,9 @@
     <div class="step">
       <span class="label">Step 1</span>
       <h3>Download the skill</h3>
-      <div class="dl"><a class="te-btn te-btn--primary" href="black-friday-ai-check.zip" download>Download black-friday-ai-check.zip</a><span class="src">5 KB. Don't unzip it. If your Mac unzipped it for you, right-click the folder and choose Compress to turn it back into a zip.</span></div>
+      <div class="dl"><a class="te-btn te-btn--primary" href="black-friday-ai-check.zip" download>Download black-friday-ai-check.zip</a></div>
+      <p>This zip file <strong>is</strong> the skill. In the next step you'll upload it to Claude just as it is, so leave it zipped.</p>
+      <p class="src">If your Mac unzipped it for you (you'll see a folder instead of a .zip), right-click the folder and choose <strong>Compress</strong> to turn it back into a zip.</p>
     </div>
 
     <div class="step">
@@ -192,7 +195,7 @@
       <li><strong>The only thing Claude changes</strong> is adding an FAQ to the bottom of a product description. Never prices, stock, discounts, titles, images, product status, collections, your theme or settings.</li>
       <li><strong>No made-up facts.</strong> If Claude isn't sure about a delivery date, return terms or sizing, it writes <code>[CONFIRM]</code> and asks you. Fill every one in.</li>
       <li><strong>One product at a time.</strong> Check each page looks right before moving on. If your theme shows it oddly, undo it and paste instead.</li>
-      <li><strong>Finish by Mon 23 Nov, then freeze store changes from Tue 24 Nov.</strong> Black Friday week isn't the time for experiments.</li>
+      <li><strong>Get your FAQs live by Mon 23 Nov.</strong> That gives AI tools a few days to pick them up before Black Friday. Then leave your product pages alone for the big week, so nothing breaks while the sales roll in.</li>
     </ul>
 
     <div class="note"><b>Can't upload skills?</b> Copy the prompt below into a new Claude chat instead. It runs the same three parts with the same rules. Fill in your store and products at the top.</div>
